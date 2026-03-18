@@ -7,7 +7,7 @@
   <style>
     :root {
       --bg: #f4f8f6;
-      --paper: rgba(255, 255, 255, 0.86);
+      --paper: rgba(255, 255, 255, 0.88);
       --panel: #fbfdfc;
       --ink: #33413f;
       --muted: #6d827d;
@@ -32,7 +32,7 @@
     }
 
     .page {
-      width: min(980px, calc(100% - 32px));
+      width: min(1120px, calc(100% - 32px));
       margin: 24px auto;
       padding: 22px;
       border-radius: 28px;
@@ -61,42 +61,99 @@
     }
 
     .lead {
-      margin: 0 0 24px;
+      margin: 0 0 26px;
+      max-width: 42rem;
       color: var(--muted);
       line-height: 1.85;
     }
 
     .list {
       display: grid;
-      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
     }
 
     .project {
       display: block;
-      padding: 24px;
-      border-radius: 24px;
+      overflow: hidden;
+      border-radius: 26px;
       border: 1px solid var(--line);
       background: var(--panel);
       color: inherit;
       text-decoration: none;
+      box-shadow: 0 12px 28px rgba(96, 122, 116, 0.08);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .project:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 28px rgba(96, 122, 116, 0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px rgba(96, 122, 116, 0.14);
     }
 
-    .project strong {
+    .thumb {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #dde8e4;
+    }
+
+    .thumb img.cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
-      margin-bottom: 8px;
+    }
+
+    .logo-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(51, 65, 63, 0.56);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo-badge img {
+      display: block;
+      width: 86px;
+      height: auto;
+    }
+
+    .content {
+      padding: 18px 18px 20px;
+    }
+
+    .content strong {
+      display: block;
+      margin-bottom: 6px;
       font-size: 1.28rem;
       font-weight: 600;
     }
 
-    .project span {
+    .content em {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--accent-deep);
+      letter-spacing: 0.04em;
+    }
+
+    .content span {
       color: var(--muted);
       line-height: 1.75;
+    }
+
+    @media (max-width: 760px) {
+      .list {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        padding: 18px;
+      }
     }
   </style>
 </head>
@@ -109,33 +166,22 @@
 
     <h1>Project Directory</h1>
     <p class="lead">
-      Five projects are listed here. Each item opens as its own dedicated page.
+      Featured work is shown here in a visual directory. Each card opens into its own project page, with the image acting as a quick preview of the campaign's tone and theme.
     </p>
 
     <section class="list">
       <a class="project" href="never-again.html">
-        <strong>Never Again</strong>
-        <span>An image-based project page built from the materials in the local `never again` folder.</span>
-      </a>
-
-      <a class="project" href="project-two.html">
-        <strong>Project Two</strong>
-        <span>A placeholder project page prepared for future portfolio content.</span>
-      </a>
-
-      <a class="project" href="project-three.html">
-        <strong>Project Three</strong>
-        <span>A placeholder project page prepared for future portfolio content.</span>
-      </a>
-
-      <a class="project" href="project-four.html">
-        <strong>Project Four</strong>
-        <span>A placeholder project page prepared for future portfolio content.</span>
-      </a>
-
-      <a class="project" href="project-five.html">
-        <strong>Project Five</strong>
-        <span>A placeholder project page prepared for future portfolio content.</span>
+        <div class="thumb">
+          <img class="cover" src="src/never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again project preview">
+          <div class="logo-badge">
+            <img src="src/never%20again/21GRAMS_White.webp" alt="21GRAMS logo">
+          </div>
+        </div>
+        <div class="content">
+          <strong>Never Again</strong>
+          <em>A campaign concept for 21GRAMS</em>
+          <span>A vaccine-awareness campaign that uses historical disease imagery, AR touchpoints, and a direct call to action to remind viewers that the past can return.</span>
+        </div>
       </a>
     </section>
   </main>
