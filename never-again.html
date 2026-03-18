@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>never again</title>
+  <style>
+    :root {
+      --bg: #f4f8f6;
+      --paper: rgba(255, 255, 255, 0.84);
+      --panel: #fbfdfc;
+      --ink: #33413f;
+      --muted: #6d827d;
+      --line: rgba(119, 154, 146, 0.22);
+      --accent: #9bbab4;
+      --accent-deep: #6f948d;
+      --shadow: 0 18px 40px rgba(96, 122, 116, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(155, 186, 180, 0.26), transparent 30%),
+        radial-gradient(circle at 90% 10%, rgba(191, 214, 208, 0.24), transparent 26%),
+        linear-gradient(180deg, #f7fbf9 0%, #eff5f3 100%);
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 24px auto;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--paper);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .menu a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .menu a:hover {
+      background: var(--accent);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(155, 186, 180, 0.18);
+      color: var(--accent-deep);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      font-weight: 600;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    .meta {
+      display: grid;
+      gap: 14px;
+    }
+
+    .meta-block {
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(219, 231, 228, 0.46), rgba(255, 255, 255, 0.75));
+      border: 1px solid var(--line);
+    }
+
+    .meta-block strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+
+    .gallery {
+      display: grid;
+      gap: 22px;
+    }
+
+    .figure {
+      overflow: hidden;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #edf4f1;
+    }
+
+    .caption {
+      padding: 20px 22px 24px;
+    }
+
+    .caption strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+
+    .caption p {
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .intro {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="nav">
+      <div class="brand">Portfolio in Celadon</div>
+      <nav class="menu" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Project Directory</a>
+      </nav>
+    </header>
+
+    <section class="intro">
+      <article class="card">
+        <span class="eyebrow">Project Detail</span>
+        <h1>never again</h1>
+        <p>
+          This page presents the visual materials found in the local `never again` folder. The layout stays calm and
+          minimal so the images remain the focus, while each caption uses the text visible inside the corresponding image.
+        </p>
+      </article>
+
+      <aside class="meta">
+        <div class="meta-block">
+          <strong>Material Source</strong>
+          All images on this page are loaded from the local `never again` folder in the current workspace.
+        </div>
+        <div class="meta-block">
+          <strong>Caption Rule</strong>
+          Each description uses the words already present in the image rather than adding a new interpretation.
+        </div>
+        <div class="meta-block">
+          <strong>Current Structure</strong>
+          Historical campaign images, AR QR concepts, AR experience mockups, and CTA presentation frames.
+        </div>
+      </aside>
+    </section>
+
+    <section class="gallery">
+      <figure class="figure">
+        <img src="never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 1">
+        <figcaption class="caption">
+          <strong>Image Text</strong>
+          <p>1952, Polio. You call vaccines unnecessary. They would have called them a miracle. Never Again. Protect tomorrow - vaccinate today.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="never%20again/Never%20Again-21grams-ziyi-3%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 2">
+        <figcaption class="caption">
+          <strong>Image Text</strong>
+          <p>1950s, Smallpox. You have the privilege of ignoring vaccines today. They didn't. Never Again. Protect tomorrow - vaccinate today.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="never%20again/Never%20Again-21grams-ziyi-4%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 3">
+        <figcaption class="caption">
+          <strong>Image Text</strong>
+          <p>1940s, Tetanus. You worry about side effects. They lived them. Never Again. Protect tomorrow - vaccinate today.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="never%20again/Never%20Again-21grams-ziyi-5%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 4">
+        <figcaption class="caption">
+          <strong>Image Text</strong>
+          <p>1964, Rubella. For you, vaccines are a dinner table debate. For them it was the difference between life and death. Never Again. Protect tomorrow - vaccinate today.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="never%20again/Never%20Again-21grams-ziyi-6%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 5">
+        <figcaption class="caption">
+          <strong>Image Text</strong>
+          <p>Augmented Reality QR Codes. Situ. 1: Swimming pool. Situ. 2: City Street. Situ. 3: School. Before vaccines, it once looked like this. But never again. Scan to see.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="never%20again/Never%20Again-21grams-ziyi-7%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 6">
+        <figcaption class="caption">
+          <strong>Image Text</strong>
+          <p>AR experience. Situ. 1: Swimming pool. Situ. 2: City Street. Situ. 3: School.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="never%20again/Never%20Again-21grams-ziyi-8%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 7">
+        <figcaption class="caption">
+          <strong>Image Text</strong>
+          <p>CTA. Never again. Protect tomorrow - vaccinate today. Get more information.</p>
+        </figcaption>
+      </figure>
+    </section>
+  </main>
+</body>
+</html>
