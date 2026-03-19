@@ -568,6 +568,12 @@
     const wrap = document.getElementById('buttonWrap');
     let navigating = false;
 
+    function resetHomeState() {
+      navigating = false;
+      wrap.classList.remove('is-guiding');
+      button.textContent = 'Enter Project Directory';
+    }
+
     button.addEventListener('click', () => {
       if (navigating) return;
       navigating = true;
@@ -577,6 +583,10 @@
       window.setTimeout(() => {
         window.location.href = 'projects.html';
       }, 1100);
+    });
+
+    window.addEventListener('pageshow', () => {
+      resetHomeState();
     });
   </script>
 </body>

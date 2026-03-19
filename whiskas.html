@@ -381,5 +381,14 @@
       </figure>
     </section>
   </main>
+
+  <script>
+    window.addEventListener('pageshow', () => {
+      const page = document.querySelector('.page');
+      page.style.animation = 'none';
+      page.style.opacity = '1';
+      page.style.transform = 'translateY(0)';
+    });
+  </script>
 </body>
 </html>

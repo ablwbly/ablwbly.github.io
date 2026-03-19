@@ -709,6 +709,16 @@
     const cartBasket = document.getElementById('cartBasket');
     let navigating = false;
 
+    function resetDirectoryState() {
+      navigating = false;
+      document.body.classList.remove('is-transitioning');
+      market.classList.remove('is-guiding', 'is-target-never', 'is-target-whiskas', 'is-target-raid');
+      document.querySelectorAll('.flying-card').forEach((card) => card.remove());
+      products.forEach((product) => {
+        product.classList.remove('selected', 'is-hidden');
+      });
+    }
+
     function getCartShift(target) {
       if (window.innerWidth <= 640) {
         if (target === 'whiskas') {
@@ -794,6 +804,10 @@
           fadeToPage(flyingCard, product.href);
         }, 720);
       });
+    });
+
+    window.addEventListener('pageshow', () => {
+      resetDirectoryState();
     });
   </script>
 </body>
