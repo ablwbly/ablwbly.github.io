@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whiskas</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #f7f8f5;
+      --paper: rgba(255, 255, 255, 0.92);
+      --panel: #fbfcfa;
+      --ink: #263331;
+      --muted: #5d716d;
+      --line: rgba(119, 154, 146, 0.18);
+      --accent: #6f948d;
+      --accent-soft: rgba(111, 148, 141, 0.1);
+      --shadow: 0 18px 36px rgba(84, 108, 103, 0.08);
+      --stage: #f4f6f3;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(155, 186, 180, 0.1), transparent 24%),
+        linear-gradient(180deg, #fafbf9 0%, #f2f5f3 100%);
+    }
+
+    .page {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 64px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 36px;
+    }
+
+    .brand,
+    .menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1.08rem;
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .card,
+    .meta-block,
+    .figure {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 30px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.96rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(3.1rem, 6vw, 5rem);
+      line-height: 0.95;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.22rem;
+      line-height: 1.72;
+    }
+
+    .meta {
+      display: grid;
+      gap: 14px;
+    }
+
+    .meta-block {
+      padding: 20px;
+      background: var(--panel);
+    }
+
+    .meta-block strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 1.22rem;
+      font-weight: 600;
+    }
+
+    .meta-block span {
+      display: block;
+      color: var(--muted);
+      font-size: 1.14rem;
+      line-height: 1.68;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+
+    .figure {
+      overflow: hidden;
+    }
+
+    .figure.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .visual-stage {
+      display: grid;
+      place-items: center;
+      min-height: 420px;
+      padding: 18px;
+      background: var(--stage);
+    }
+
+    .visual-stage img {
+      max-width: 100%;
+      max-height: 520px;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      border-radius: 18px;
+    }
+
+    .visual-stage.wide {
+      min-height: 360px;
+      padding: 14px;
+    }
+
+    .visual-stage.wide img {
+      max-height: none;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 18px;
+    }
+
+    .caption {
+      padding: 20px 22px 24px;
+      background: var(--paper);
+    }
+
+    .caption strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.24rem;
+      font-weight: 600;
+    }
+
+    .caption p {
+      font-size: 1.16rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 900px) {
+      .page { width: min(1080px, calc(100% - 28px)); }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .intro { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+      .figure.full-width { grid-column: auto; }
+      .visual-stage {
+        min-height: 320px;
+        padding: 16px;
+      }
+      .visual-stage img {
+        max-height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="nav">
+      <a class="brand" href="index.html">Ziyi Ren</a>
+      <nav class="menu" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Project Directory</a>
+      </nav>
+    </header>
+
+    <section class="intro">
+      <article class="card">
+        <span class="eyebrow">A Playful Social-First Campaign</span>
+        <h1>Whiskas</h1>
+        <p>
+          This Whiskas concept imagines cats as energetic lifestyle characters, turning everyday attitudes, habits, and food moments into humorous social content built for quick attention and brand recall.
+        </p>
+      </article>
+
+      <aside class="meta">
+        <div class="meta-block">
+          <strong>Direction</strong>
+          <span>A light, witty campaign voice built around confident cat personalities and social-first visual hooks.</span>
+        </div>
+        <div class="meta-block">
+          <strong>Format</strong>
+          <span>Hero visuals, short-copy posters, and Instagram-story-style content designed for fast, playful consumption.</span>
+        </div>
+        <div class="meta-block">
+          <strong>Tone</strong>
+          <span>Playful, mischievous, and affectionate, with the product world folded naturally into each cat scenario.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="gallery">
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/whiskas1.png" alt="Whiskas visual 1">
+        </div>
+        <figcaption class="caption">
+          <strong>Climbing Visual</strong>
+          <p>A hero image built around the line, "Reaching the top is just an ego boost," positioning the cat as playful, bold, and slightly self-important.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/whiskas2.jpg" alt="Whiskas visual 2">
+        </div>
+        <figcaption class="caption">
+          <strong>Yoga Visual</strong>
+          <p>A humorous lifestyle execution that turns a simple stretch into character copy: "they should change the name to downward cat."</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/whiskas3.jpg" alt="Whiskas visual 3">
+        </div>
+        <figcaption class="caption">
+          <strong>Marathon Visual</strong>
+          <p>A campaign poster that frames zoomies as athletic triumph, using the cat's personality to drive the joke and the brand mood.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/whiskas4.jpg" alt="Whiskas visual 4">
+        </div>
+        <figcaption class="caption">
+          <strong>Series Poster One</strong>
+          <p>An additional Whiskas execution that extends the same playful art direction and keeps the cat-character world consistent.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/whiskas5.jpg" alt="Whiskas visual 5">
+        </div>
+        <figcaption class="caption">
+          <strong>Series Poster Two</strong>
+          <p>A continuation of the campaign system, balancing brand color, expressive imagery, and short, punchy social-style copy.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/whiskas6.jpg" alt="Whiskas visual 6">
+        </div>
+        <figcaption class="caption">
+          <strong>Series Poster Three</strong>
+          <p>A final visual in the series that reinforces the cat's voice and the upbeat, humorous rhythm of the overall concept.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/ChatGPT%20Image%202026%E5%B9%B43%E6%9C%8818%E6%97%A5%2017_15_19.png" alt="Whiskas concept visual 7">
+        </div>
+        <figcaption class="caption">
+          <strong>Concept Exploration One</strong>
+          <p>An additional concept image that expands the campaign's playful visual language and explores another exaggerated cat-character scenario.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/ChatGPT%20Image%202026%E5%B9%B43%E6%9C%8818%E6%97%A5%2017_47_38.png" alt="Whiskas concept visual 8">
+        </div>
+        <figcaption class="caption">
+          <strong>Concept Exploration Two</strong>
+          <p>A supporting visual showing how the same campaign voice can shift into new everyday scenes while keeping the brand personality intact.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/ChatGPT%20Image%202026%E5%B9%B43%E6%9C%8818%E6%97%A5%2017_51_15.png" alt="Whiskas concept visual 9">
+        </div>
+        <figcaption class="caption">
+          <strong>Concept Exploration Three</strong>
+          <p>A further concept variation used to test character attitude, visual humor, and product integration inside the wider Whiskas campaign world.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/whiskas/ChatGPT%20Image%202026%E5%B9%B43%E6%9C%8818%E6%97%A5%2017_58_28.png" alt="Whiskas concept visual 10">
+        </div>
+        <figcaption class="caption">
+          <strong>Concept Exploration Four</strong>
+          <p>A final exploratory image that rounds out the set and shows how the playful brand voice can remain consistent across multiple executions.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure full-width">
+        <div class="visual-stage wide">
+          <img src="src/whiskas/Instagram%20story%20mockup.png" alt="Whiskas story mockup">
+        </div>
+        <figcaption class="caption">
+          <strong>Instagram Story Mockup</strong>
+          <p>A social content expansion showing how the campaign translates into polls, snack moments, and quick interactive story beats.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure full-width">
+        <div class="visual-stage wide">
+          <img src="src/whiskas/Frame%209.png" alt="Whiskas story sequence">
+        </div>
+        <figcaption class="caption">
+          <strong>Story Sequence</strong>
+          <p>A multi-frame social presentation that demonstrates the campaign's flexibility across different cat personas, routines, and product contexts.</p>
+        </figcaption>
+      </figure>
+    </section>
+  </main>
+</body>
+</html>
