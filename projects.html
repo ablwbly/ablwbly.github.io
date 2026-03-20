@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,17 +9,16 @@
 
     :root {
       --bg: #f0efeb;
-      --paper: rgba(249, 246, 240, 0.96);
       --ink: #312b25;
       --muted: #74695c;
       --line: rgba(116, 105, 92, 0.18);
       --accent: #8d7662;
       --accent-soft: rgba(141, 118, 98, 0.12);
+      --machine: #8d7359;
+      --machine-dark: #6f5945;
+      --metal: #d8c7b3;
+      --field: rgba(250, 246, 240, 0.8);
       --shadow: 0 18px 36px rgba(77, 64, 52, 0.08);
-      --shelf: #ddd3c7;
-      --shelf-edge: #c4b6a4;
-      --cream: #f3ece1;
-      --cream-deep: #e5d6bf;
     }
 
     * { box-sizing: border-box; }
@@ -38,6 +37,11 @@
       width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
       padding: 24px 0 76px;
+      transition: opacity 0.42s ease;
+    }
+
+    body.is-transitioning .page {
+      opacity: 0;
     }
 
     .nav {
@@ -57,7 +61,7 @@
     }
 
     .hero {
-      padding: 48px 0 18px;
+      padding: 42px 0 16px;
       text-align: center;
     }
 
@@ -73,254 +77,98 @@
       margin: 14px auto 0;
       max-width: 42rem;
       color: var(--muted);
-      font-size: 1.16rem;
-      line-height: 1.68;
+      font-size: 1.14rem;
+      line-height: 1.62;
     }
 
-    .market {
+    .mine-scene {
       position: relative;
-      margin-top: 26px;
-      padding: 34px 20px 252px;
-      border-radius: 30px;
+      margin-top: 18px;
+      min-height: 980px;
       background: transparent;
-      box-shadow: none;
       overflow: hidden;
       isolation: isolate;
     }
 
-    .market::before {
+    .mine-scene::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: none;
+      background:
+        radial-gradient(circle at 18% 74%, rgba(141, 118, 98, 0.08), transparent 20%),
+        radial-gradient(circle at 82% 68%, rgba(141, 118, 98, 0.08), transparent 18%);
       pointer-events: none;
     }
 
-    .market-note {
+    .scene-note {
       position: absolute;
       top: 18px;
-      left: 22px;
+      left: 24px;
       color: var(--accent);
       font-size: 0.82rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       transform: rotate(-2deg);
-      z-index: 2;
+      z-index: 5;
     }
 
-    .shelf-row {
+    .machine-zone {
       position: relative;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-      padding-top: 30px;
-      align-items: end;
-      z-index: 2;
+      width: min(700px, calc(100% - 80px));
+      height: 246px;
+      margin: 18px auto 0;
+      z-index: 4;
     }
 
-    .shelf-row::after {
-      content: "";
-      position: absolute;
-      left: 12px;
-      right: 0;
-      bottom: -16px;
-      height: 14px;
-      border-radius: 12px;
-      background: linear-gradient(180deg, var(--shelf), var(--shelf-edge));
-      box-shadow: 0 8px 18px rgba(97, 81, 64, 0.12);
-    }
-
-    .product {
-      position: relative;
-      display: block;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: rgba(250, 247, 241, 0.98);
-      color: inherit;
-      text-decoration: none;
-      box-shadow: 0 10px 22px rgba(77, 64, 52, 0.06);
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      transform-origin: center bottom;
-    }
-
-    .product:hover {
-      transform: translateY(-5px) rotate(-1deg);
-      box-shadow: 0 16px 24px rgba(77, 64, 52, 0.12);
-    }
-
-    .product.is-hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .product.empty {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .product-top {
-      position: relative;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      border-radius: 15px;
-      background: #e7dfd4;
-    }
-
-    .product-top img.cover {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .cover-copy {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      padding: 16px;
-      color: var(--ink);
-      font-size: 1.42rem;
-      line-height: 1.05;
-      letter-spacing: 0.06em;
-      text-align: center;
-      text-transform: uppercase;
-      background:
-        radial-gradient(circle at top, rgba(141, 118, 98, 0.16), transparent 52%),
-        linear-gradient(180deg, rgba(249, 246, 240, 0.92), rgba(230, 221, 210, 0.95));
-    }
-
-    .badge {
+    .machine-doodle {
       position: absolute;
       top: 10px;
-      left: 10px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 54px;
-      min-height: 26px;
-      padding: 5px 7px;
-      border-radius: 999px;
-      background: rgba(49, 43, 37, 0.56);
-      backdrop-filter: blur(6px);
+      left: 50%;
+      width: 250px;
+      height: 188px;
+      transform: translateX(-50%);
+      z-index: 3;
+      color: var(--machine-dark);
     }
 
-    .badge img {
-      max-width: 64px;
-      max-height: 14px;
-      width: auto;
-      height: auto;
+    .machine-doodle svg {
+      width: 100%;
+      height: 100%;
       display: block;
+      overflow: visible;
+      stroke: currentColor;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    .badge.text-badge {
-      padding: 5px 10px;
-      color: #f7f0e2;
-      font-size: 0.96rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .machine-doodle .body-fill {
+      fill: rgba(255, 251, 245, 0.72);
+      stroke: none;
     }
 
-    .product-info {
-      padding-top: 8px;
+    .machine-doodle .cheek {
+      fill: rgba(141, 118, 98, 0.12);
+      stroke: none;
     }
 
-    .product-type {
-      display: inline-block;
-      color: var(--accent);
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .machine-doodle .wheel {
+      fill: rgba(255, 251, 245, 0.78);
     }
 
-    .product-info strong {
-      display: block;
-      margin-top: 6px;
-      font-size: 1.18rem;
-      font-weight: 600;
-      line-height: 1;
-    }
-
-    .product-info em {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-style: normal;
-      font-size: 0.82rem;
-      letter-spacing: 0.02em;
-      line-height: 1.2;
-    }
-
-    .product-info span {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.48;
-    }
-
-    .product-tag {
-      display: none;
-    }
-
-    .cart-lane {
+    .miner {
       position: absolute;
-      left: 20px;
-      right: 20px;
-      bottom: 32px;
-      height: 184px;
-      z-index: 2;
-    }
-
-    .lane-line {
-      position: absolute;
-      left: 12px;
-      right: 0;
-      bottom: 18px;
-      height: 4px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(141, 118, 98, 0.12), rgba(141, 118, 98, 0.42), rgba(141, 118, 98, 0.12));
-    }
-
-    .cart-group {
-      position: absolute;
-      left: 6px;
-      bottom: 8px;
-      width: 320px;
-      height: 132px;
-      --cart-shift-x: 0px;
-      --cart-scale: 1;
-      transform: translateX(var(--cart-shift-x)) scale(var(--cart-scale));
-      transform-origin: left bottom;
-      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .cart-guide-note {
-      position: absolute;
-      left: 12px;
-      bottom: 150px;
-      color: var(--muted);
-      font-size: 0.96rem;
-      transform: rotate(-4deg);
-      opacity: 0.9;
-      transition: opacity 0.25s ease;
-    }
-
-    .market.is-guiding .cart-guide-note {
-      opacity: 0;
-    }
-
-    .doodle-person,
-    .doodle-cart {
-      position: absolute;
-      bottom: 8px;
+      top: 64px;
+      width: 108px;
+      height: 140px;
       color: var(--accent);
     }
 
-    .doodle-person svg,
-    .doodle-cart svg {
+    .miner.left { left: 54px; }
+    .miner.right { right: 54px; }
+
+    .miner svg {
       width: 100%;
       height: 100%;
       display: block;
@@ -332,298 +180,250 @@
       stroke-linejoin: round;
     }
 
-    .doodle-person {
-      width: 94px;
-      height: 116px;
-    }
-
-    .doodle-person.one { left: 6px; }
-    .doodle-person.two { left: 82px; }
-
-    .doodle-person .body {
-      animation: bob 3.1s ease-in-out infinite;
+    .miner .body {
       transform-origin: center bottom;
+      animation: miner-bob 3.2s ease-in-out infinite;
     }
 
-    .doodle-person.two .body { animation-delay: 0.35s; }
+    .miner.right .body { animation-delay: 0.4s; }
 
-    .doodle-person .arm-a,
-    .doodle-person .arm-b,
-    .doodle-person .leg-a,
-    .doodle-person .leg-b {
-      transform-box: fill-box;
+    .machine-zone.is-guiding .miner.right .arm-a,
+    .machine-zone.is-guiding .miner.right .arm-b {
       transform-origin: center top;
+      transform-box: fill-box;
+      animation: crank-motion 0.62s ease-in-out infinite;
     }
 
-    .doodle-person.one .head-tilt { transform: rotate(-4deg); transform-origin: center center; }
-    .doodle-person.two .head-tilt { transform: rotate(3deg); transform-origin: center center; }
-
-    .market.is-guiding .doodle-person .body {
-      animation: push-bob 0.55s ease-in-out infinite;
-    }
-
-    .market.is-guiding .doodle-person.one .arm-a,
-    .market.is-guiding .doodle-person.one .leg-b,
-    .market.is-guiding .doodle-person.two .arm-a,
-    .market.is-guiding .doodle-person.two .leg-b {
-      animation: walk-forward 0.55s ease-in-out infinite;
-    }
-
-    .market.is-guiding .doodle-person.one .arm-b,
-    .market.is-guiding .doodle-person.one .leg-a,
-    .market.is-guiding .doodle-person.two .arm-b,
-    .market.is-guiding .doodle-person.two .leg-a {
-      animation: walk-backward 0.55s ease-in-out infinite;
-    }
-
-    .doodle-cart {
-      width: 174px;
-      height: 104px;
-      left: 160px;
-      bottom: 10px;
-    }
-
-    .market.is-guiding .doodle-cart {
-      animation: cart-jitter 0.55s ease-in-out infinite;
-    }
-
-    .pickup-note {
+    .hook-mount {
       position: absolute;
-      right: 18px;
-      bottom: 138px;
-      color: var(--accent);
-      font-size: 0.96rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      transform: rotate(3deg);
+      top: 34px;
+      left: 50%;
+      width: 22px;
+      height: 22px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: linear-gradient(180deg, #fff7ee, #ccb19b);
+      box-shadow:
+        0 6px 10px rgba(77, 64, 52, 0.12),
+        inset 0 1px 0 rgba(255, 248, 240, 0.8);
+      z-index: 6;
+    }
+
+    .hook-assembly {
+      position: absolute;
+      top: 44px;
+      left: 50%;
+      width: 0;
+      height: 0;
+      transform: translateX(-50%) rotate(var(--hook-angle, 0deg));
+      transform-origin: top center;
+      transition: transform 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 5;
+    }
+
+    .rope {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 3px;
+      height: var(--hook-length, 0px);
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(111, 89, 69, 0.9), rgba(111, 89, 69, 0.35));
+      transition: height 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .claw {
+      position: absolute;
+      top: var(--hook-length, 0px);
+      left: 50%;
+      width: 52px;
+      height: 52px;
+      transform: translate(-50%, -6px);
+      transition: top 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .claw svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      stroke: var(--machine-dark);
+      stroke-width: 2.4;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .machine-zone.is-grabbing .claw-left {
+      transform: rotate(10deg);
+      transform-origin: 18px 28px;
+    }
+
+    .machine-zone.is-grabbing .claw-right {
+      transform: rotate(-10deg);
+      transform-origin: 34px 28px;
+    }
+
+    .field-note {
+      position: absolute;
+      top: 224px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-1deg);
+      color: var(--muted);
+      font-size: 0.98rem;
+      opacity: 0.92;
+      z-index: 4;
+      transition: opacity 0.22s ease;
+    }
+
+    .machine-zone.is-guiding + .field-note {
       opacity: 0;
-      transition: opacity 0.35s ease 0.4s, transform 0.35s ease 0.4s;
     }
 
-    .market.is-guiding .pickup-note {
-      opacity: 1;
-      transform: rotate(0deg);
-    }
-
-    .pickup-stars {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
+    .icon-field {
+      position: relative;
+      min-height: 710px;
+      padding: 340px 32px 56px;
       z-index: 3;
     }
 
-    .pickup-stars span {
+    .project-icon {
       position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(141, 118, 98, 0.24);
-      opacity: 0;
-      transform: scale(0.4);
-    }
-    .pickup-stars span:nth-child(1) {
-      left: var(--star-1x, -999px);
-      top: var(--star-1y, -999px);
-    }
-
-    .pickup-stars span:nth-child(2) {
-      left: var(--star-2x, -999px);
-      top: var(--star-2y, -999px);
-    }
-
-    .pickup-stars span:nth-child(3) {
-      left: var(--star-3x, -999px);
-      top: var(--star-3y, -999px);
-    }
-
-    .market.is-guiding .pickup-stars span {
-      animation: pop 0.8s ease forwards;
-    }
-
-    .market.is-guiding .pickup-stars span:nth-child(2) { animation-delay: 0.1s; }
-    .market.is-guiding .pickup-stars span:nth-child(3) { animation-delay: 0.2s; }
-
-    .flying-card {
-      position: fixed;
-      z-index: 20;
-      margin: 0;
-      pointer-events: none;
-      opacity: 1;
+      left: var(--left);
+      top: var(--top);
+      width: 148px;
+      transform: translate(-50%, -50%) rotate(var(--tilt, 0deg));
       transform-origin: center center;
-      transition:
-        transform 0.72s cubic-bezier(0.2, 1, 0.35, 1),
-        opacity 0.16s ease,
-        border-radius 0.58s ease,
-        box-shadow 0.58s ease;
-      box-shadow: 0 18px 30px rgba(77, 64, 52, 0.18);
-      overflow: hidden;
-      background: rgba(250, 247, 241, 0.98);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.22s ease, opacity 0.22s ease;
     }
 
-    .flying-card .product-top {
-      border-radius: 15px 15px 0 0;
+    .project-icon:hover {
+      transform: translate(-50%, -50%) rotate(var(--tilt, 0deg)) scale(1.04);
     }
 
-    .flying-card .product-info {
-      background: rgba(250, 247, 241, 0.98);
-    }
-
-    body.is-transitioning .page {
+    .project-icon.is-hidden {
       opacity: 0;
-      transition: opacity 0.45s ease;
+      visibility: hidden;
     }
 
-    @keyframes bob {
+    .icon-shell {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+    }
+
+    .icon-shell img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 10px 14px rgba(77, 64, 52, 0.12));
+    }
+
+    .icon-label {
+      margin-top: 10px;
+      text-align: center;
+      color: var(--ink);
+      font-size: 1.08rem;
+      line-height: 1.18;
+      text-wrap: balance;
+    }
+
+    .caught-icon {
+      position: absolute;
+      left: 50%;
+      top: 10px;
+      pointer-events: none;
+      z-index: 6;
+      transform: translate(-50%, 0) rotate(-18deg) scale(0.78);
+      transform-origin: center center;
+      transition: opacity 0.24s ease;
+    }
+
+    .caught-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 8px 12px rgba(77, 64, 52, 0.12));
+    }
+
+    @keyframes miner-bob {
       0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-4px) rotate(2deg); }
+      50% { transform: translateY(-4px) rotate(1.5deg); }
     }
 
-    @keyframes push-bob {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-5px) rotate(3deg); }
-    }
-
-    @keyframes walk-forward {
-      0%, 100% { transform: rotate(10deg) translateY(0); }
-      50% { transform: rotate(-12deg) translateY(-1px); }
-    }
-
-    @keyframes walk-backward {
-      0%, 100% { transform: rotate(-9deg) translateY(0); }
-      50% { transform: rotate(12deg) translateY(-1px); }
-    }
-
-    @keyframes cart-jitter {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-2px) rotate(-1deg); }
-    }
-
-    @keyframes picked {
-      0% { transform: translateY(0) scale(1); }
-      35% { transform: translateY(-14px) rotate(-2deg) scale(1.03); }
-      100% { transform: translateY(-10px) rotate(-1deg) scale(1.01); }
-    }
-
-    @keyframes pop {
-      0% { opacity: 0; transform: scale(0.4); }
-      40% { opacity: 0.95; transform: scale(1.15); }
-      100% { opacity: 0; transform: scale(0.85); }
+    @keyframes crank-motion {
+      0%, 100% { transform: rotate(8deg); }
+      50% { transform: rotate(-12deg); }
     }
 
     @media (max-width: 900px) {
       .page { width: min(1180px, calc(100% - 28px)); }
-      .shelf-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .market { padding-bottom: 228px; }
-    }
-
-    @media (max-height: 900px) and (min-width: 901px) {
-      .page {
-        padding-top: 14px;
-        padding-bottom: 28px;
+      .mine-scene { min-height: 1220px; }
+      .machine-zone {
+        width: min(560px, calc(100% - 30px));
+        height: 230px;
       }
-
-      .hero {
-        padding: 20px 0 6px;
+      .machine-doodle {
+        width: 214px;
+        height: 168px;
       }
-
-      h1 {
-        font-size: clamp(2.8rem, 5vw, 4.2rem);
+      .miner.left { left: 12px; }
+      .miner.right { right: 12px; }
+      .icon-field {
+        min-height: 940px;
+        padding: 334px 20px 46px;
       }
-
-      .lead {
-        display: none;
-      }
-
-      .market {
-        margin-top: 12px;
-        padding: 20px 16px 170px;
-      }
-
-      .market-note {
-        top: 8px;
-        left: 16px;
-        font-size: 0.76rem;
-      }
-
-      .shelf-row {
-        gap: 10px;
-        padding-top: 18px;
-      }
-
-      .product {
-        padding: 7px;
-      }
-
-      .product-type {
-        font-size: 0.74rem;
-      }
-
-      .product-info {
-        padding-top: 4px;
-      }
-
-      .product-info strong {
-        margin-top: 4px;
-        font-size: 1rem;
-      }
-
-      .product-info em {
-        margin-top: 3px;
-        font-size: 0.74rem;
-        line-height: 1.1;
-      }
-
-      .product-info span {
-        display: none;
-      }
-
-      .cart-lane {
-        bottom: 10px;
-        height: 132px;
-      }
-
-      .cart-guide-note {
-        bottom: 110px;
-        font-size: 0.82rem;
-      }
-
-      .pickup-note {
-        bottom: 100px;
-        right: 10px;
-        font-size: 0.8rem;
-      }
-
-      .cart-group {
-        --cart-scale: 0.8;
-      }
-    }
-
-    @media (max-height: 760px) and (min-width: 901px) {
-      .market {
-        padding-bottom: 156px;
-      }
-
-      .cart-lane {
-        height: 124px;
-      }
-
-      .cart-group {
-        --cart-scale: 0.74;
+      .project-icon {
+        width: 132px;
       }
     }
 
     @media (max-width: 640px) {
       .page { width: min(1180px, calc(100% - 20px)); }
       .nav { flex-direction: column; align-items: flex-start; }
-      .shelf-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-      .market { padding: 30px 14px 206px; }
-      .product { padding: 9px; }
-      .product-info strong { font-size: 1.06rem; }
-      .product-info em { font-size: 0.84rem; }
-      .product-info span { font-size: 0.86rem; }
-      .cart-lane { left: 10px; right: 10px; }
-      .cart-group { --cart-scale: 0.8; }
-      .pickup-note { right: 10px; bottom: 126px; font-size: 0.84rem; }
+      .hero {
+        padding: 34px 0 12px;
+      }
+      .lead {
+        font-size: 1.02rem;
+        line-height: 1.48;
+      }
+      .mine-scene { min-height: 1440px; }
+      .machine-zone {
+        width: min(360px, calc(100% - 18px));
+        height: 216px;
+      }
+      .machine-doodle {
+        width: 180px;
+        height: 148px;
+      }
+      .miner {
+        width: 86px;
+        height: 118px;
+        top: 76px;
+      }
+      .miner.left { left: 0; }
+      .miner.right { right: 0; }
+      .field-note {
+        top: 206px;
+        width: calc(100% - 28px);
+        text-align: center;
+        font-size: 0.9rem;
+      }
+      .icon-field {
+        min-height: 1180px;
+        padding: 328px 12px 36px;
+      }
+      .project-icon {
+        width: 114px;
+      }
+      .icon-label {
+        font-size: 0.94rem;
+      }
     }
   </style>
 </head>
@@ -636,355 +436,308 @@
 
     <section class="hero">
       <h1>Project Directory</h1>
-      <p class="lead">
-        Two little shoppers move through the aisle. Each project sits on the shelf like a product. Pick one, let them roll over, grab it, and open the work.
-      </p>
+      <p class="lead">Tap an icon and let the claw shoot straight to it, reel it back, and hand it off for the next page.</p>
     </section>
 
-    <section class="market" id="market">
-      <div class="market-note">pick from the shelf</div>
-      <div class="pickup-stars"><span></span><span></span><span></span></div>
+    <section class="mine-scene" id="mineScene">
+      <div class="scene-note">pick from the field</div>
 
-      <div class="shelf-row">
-        <a class="product" href="never-again.html" data-target="never">
-          <div class="product-top">
-            <img class="cover" src="src/never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again preview">
-            <div class="badge">
-              <img src="src/never%20again/21GRAMS_White.webp" alt="21GRAMS logo">
-            </div>
-          </div>
-          <div class="product-info">
-            <span class="product-type">Featured Project</span>
-            <strong>Never Again</strong>
-            <em>A campaign concept for 21GRAMS</em>
-            <span>A vaccine-awareness campaign using historical imagery, AR touchpoints, and a direct call to action to show how quickly the past can return.</span>
-          </div>
-          <div class="product-tag">1</div>
-        </a>
+      <div class="machine-zone" id="machineZone" aria-hidden="true">
+        <div class="machine-doodle" aria-hidden="true">
+          <svg viewBox="0 0 220 160" role="presentation">
+            <path class="body-fill" d="M61 41 C69 28 84 20 110 20 C136 20 152 28 159 41 C173 43 182 54 182 68 C182 80 176 90 167 96 L163 121 C162 131 154 138 143 138 H76 C66 138 58 131 57 121 L53 96 C44 90 38 80 38 68 C38 54 47 43 61 41 Z"></path>
+            <path d="M76 39 C84 27 96 22 110 22 C125 22 137 27 145 39"></path>
+            <path d="M61 41 C48 42 38 53 38 68 C38 80 44 89 53 95"></path>
+            <path d="M159 41 C172 42 182 53 182 68 C182 80 176 89 167 95"></path>
+            <path d="M53 95 L57 122 C58 132 66 138 77 138"></path>
+            <path d="M167 95 L163 122 C162 132 154 138 143 138"></path>
+            <path d="M77 138 H143"></path>
+            <path d="M84 138 L79 149"></path>
+            <path d="M136 138 L141 149"></path>
+            <path d="M74 149 H92"></path>
+            <path d="M128 149 H146"></path>
+            <path d="M110 22 L110 10"></path>
+            <path d="M96 12 C101 8 106 6 110 6 C114 6 119 8 124 12"></path>
+            <circle class="wheel" cx="77" cy="138" r="8"></circle>
+            <circle class="wheel" cx="143" cy="138" r="8"></circle>
+            <path d="M89 73 C95 67 102 64 110 64 C118 64 125 67 131 73"></path>
+            <circle cx="91" cy="57" r="3"></circle>
+            <circle cx="129" cy="57" r="3"></circle>
+            <ellipse class="cheek" cx="80" cy="67" rx="8" ry="5"></ellipse>
+            <ellipse class="cheek" cx="140" cy="67" rx="8" ry="5"></ellipse>
+            <path d="M63 85 C73 79 82 75 92 74"></path>
+            <path d="M157 85 C147 79 138 75 128 74"></path>
+            <path d="M53 92 C48 92 43 94 39 98"></path>
+            <path d="M167 92 C172 92 177 94 181 98"></path>
+          </svg>
+        </div>
 
-        <a class="product" href="whiskas.html" data-target="whiskas">
-          <div class="product-top">
-            <img class="cover" src="src/whiskas/whiskas1.png" alt="Whiskas preview">
-            <div class="badge">
-              <img src="src/whiskas/logo_2_1.png" alt="Whiskas logo">
-            </div>
-          </div>
-          <div class="product-info">
-            <span class="product-type">Brand Campaign</span>
-            <strong>Whiskas</strong>
-            <em>A playful social-first campaign</em>
-            <span>A character-driven Whiskas concept that turns everyday cat behavior into humorous, energetic lifestyle content across key visuals and social story mockups.</span>
-          </div>
-          <div class="product-tag">2</div>
-        </a>
-
-        <a class="product" href="raid.html" data-target="raid">
-          <div class="product-top">
-            <img class="cover" src="src/raid/RAID%203.png" alt="Raid preview">
-            <div class="badge text-badge">Raid</div>
-          </div>
-          <div class="product-info">
-            <span class="product-type">Advertising Concept</span>
-            <strong>RAID</strong>
-            <em>A dramatic household-defense visual concept</em>
-            <span>A bold campaign direction that turns everyday pest control into cinematic product storytelling, using scale, tension, and clean domestic settings.</span>
-          </div>
-          <div class="product-tag">3</div>
-        </a>
-
-        <a class="product" href="your-vote-your-voice.html" data-target="vote">
-          <div class="product-top">
-            <img class="cover" src="src/your%20vote%20your%20voice/404%20voice%20not%20found%202%E7%9A%84%E5%89%AF%E6%9C%AC.png" alt="Your Vote Your Voice preview">
-            <div class="badge text-badge">Vote</div>
-          </div>
-          <div class="product-info">
-            <span class="product-type">Civic Campaign</span>
-            <strong>Your Vote, Your Voice</strong>
-            <em>An awareness concept about representation and participation</em>
-            <span>A civic-minded campaign exploring how unheard voices, missing participation, and copy-led visuals can push voting back into public conversation.</span>
-          </div>
-          <div class="product-tag">4</div>
-        </a>
-
-        <a class="product" href="diamond.html" data-target="diamond">
-          <div class="product-top">
-            <img class="cover" src="src/diamond/%E9%92%BB%E7%9F%B3%E6%96%87%E6%A1%881.png" alt="Diamond preview">
-            <div class="badge text-badge">Copy</div>
-          </div>
-          <div class="product-info">
-            <span class="product-type">Luxury Copy Series</span>
-            <strong>Diamond</strong>
-            <em>A poetic copy-led jewelry concept</em>
-            <span>A short series of diamond visuals built around romantic lines that frame jewelry as emotion, chemistry, and a tangible form of love.</span>
-          </div>
-          <div class="product-tag">5</div>
-        </a>
-
-        <a class="product" href="butterworks-farm.html" data-target="butterworks">
-          <div class="product-top">
-            <img class="cover" src="src/butterworks%20farm/idea%203-1%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Butterworks Farm preview">
-            <div class="badge text-badge">Farm</div>
-          </div>
-          <div class="product-info">
-            <span class="product-type">Brand Visual Concept</span>
-            <strong>Butterworks Farm</strong>
-            <em>A rustic concept rooted in product storytelling</em>
-            <span>A small set of brand visuals that lean into warmth, craft, and pastoral cues to build a grounded, farm-forward product world.</span>
-          </div>
-          <div class="product-tag">6</div>
-        </a>
-
-        <a class="product" href="liquid-death.html" data-target="liquid">
-          <div class="product-top">
-            <div class="cover-copy">Liquid<br>Death</div>
-            <div class="badge text-badge">PDF</div>
-          </div>
-          <div class="product-info">
-            <span class="product-type">Presentation Project</span>
-            <strong>Liquid Death</strong>
-            <em>A campaign deck presented as a PDF narrative</em>
-            <span>A pitch-style project collected in PDF form, added into the portfolio as a browsable presentation rather than a static poster series.</span>
-          </div>
-          <div class="product-tag">7</div>
-        </a>
-      </div>
-
-      <div class="cart-lane" aria-hidden="true">
-        <div class="pickup-note">taking it off the shelf</div>
-        <div class="cart-guide-note">tap a product to shop the aisle</div>
-        <div class="lane-line"></div>
-        <div class="cart-group" id="cartGroup">
-          <div class="doodle-person one">
-            <svg viewBox="0 0 96 122" role="presentation">
-              <g class="body">
-                <g class="head-tilt">
-                  <circle cx="48" cy="15" r="9"></circle>
-                  <circle cx="45" cy="14" r="0.8"></circle>
-                  <circle cx="51" cy="14" r="0.8"></circle>
-                  <path d="M45 18 C47 20 49 20 51 18"></path>
-                </g>
-                <path d="M35 37 C39 31 44 28 48 28 C53 28 58 31 61 37"></path>
-                <path d="M35 38 C31 47 30 58 33 71 C35 80 40 85 46 86"></path>
-                <path d="M61 38 C65 47 66 58 63 71 C61 80 56 85 50 86"></path>
-                <path d="M46 86 C45 95 43 103 41 112"></path>
-                <path d="M50 86 C54 95 56 103 57 112"></path>
-                <g class="arm-a">
-                  <path d="M35 42 C26 48 20 56 18 64"></path>
-                  <ellipse cx="16" cy="67" rx="5" ry="4"></ellipse>
-                </g>
-                <g class="arm-b">
-                  <path d="M61 43 C68 48 73 55 75 63"></path>
-                  <ellipse cx="77" cy="66" rx="5" ry="4"></ellipse>
-                </g>
-                <g class="leg-a">
-                  <path d="M44 86 C41 94 39 102 39 111"></path>
-                  <ellipse cx="38" cy="114" rx="6" ry="3.5"></ellipse>
-                </g>
-                <g class="leg-b">
-                  <path d="M52 86 C55 94 57 102 58 111"></path>
-                  <ellipse cx="59" cy="114" rx="6" ry="3.5"></ellipse>
-                </g>
+        <div class="miner left">
+          <svg viewBox="0 0 96 122" role="presentation">
+            <g class="body">
+              <circle cx="48" cy="15" r="9"></circle>
+              <path d="M36 38 C40 30 44 27 48 27 C53 27 57 30 60 38"></path>
+              <path d="M36 38 C34 50 34 60 38 72 C40 80 44 84 48 86"></path>
+              <path d="M60 38 C62 50 62 60 58 72 C56 80 52 84 48 86"></path>
+              <g class="arm-a">
+                <path d="M36 45 C29 53 25 62 25 71"></path>
+                <ellipse cx="24" cy="74" rx="5" ry="4"></ellipse>
               </g>
-            </svg>
-          </div>
-          <div class="doodle-person two">
-            <svg viewBox="0 0 96 122" role="presentation">
-              <g class="body">
-                <g class="head-tilt">
-                  <circle cx="48" cy="15" r="9"></circle>
-                  <circle cx="45" cy="14" r="0.8"></circle>
-                  <circle cx="51" cy="14" r="0.8"></circle>
-                  <path d="M45 18 C47 19 49 19 51 18"></path>
-                </g>
-                <path d="M37 37 C40 31 44 28 48 28 C53 28 57 31 60 37"></path>
-                <path d="M37 38 C35 48 35 58 37 70 C39 79 43 84 47 86"></path>
-                <path d="M60 38 C62 48 62 58 60 70 C58 79 54 84 50 86"></path>
-                <path d="M47 86 C46 95 46 103 47 112"></path>
-                <path d="M50 86 C52 95 54 103 54 112"></path>
-                <g class="arm-a">
-                  <path d="M37 44 C31 50 27 57 26 65"></path>
-                  <ellipse cx="25" cy="68" rx="5" ry="4"></ellipse>
-                </g>
-                <g class="arm-b">
-                  <path d="M60 43 C69 48 74 56 76 65"></path>
-                  <ellipse cx="77" cy="68" rx="5" ry="4"></ellipse>
-                </g>
-                <g class="leg-a">
-                  <path d="M46 86 C44 94 44 103 45 112"></path>
-                  <ellipse cx="45" cy="115" rx="6" ry="3.5"></ellipse>
-                </g>
-                <g class="leg-b">
-                  <path d="M52 86 C54 94 55 103 55 112"></path>
-                  <ellipse cx="56" cy="115" rx="6" ry="3.5"></ellipse>
-                </g>
+              <g class="arm-b">
+                <path d="M60 44 C68 47 74 52 79 58"></path>
+                <ellipse cx="81" cy="60" rx="5" ry="4"></ellipse>
               </g>
-            </svg>
-          </div>
-          <div class="doodle-cart" id="cartBasket">
-            <svg viewBox="0 0 130 84" role="presentation">
-              <path d="M12 14 H26 L38 54 H104"></path>
-              <path d="M34 24 H112 L102 54 H42"></path>
-              <path d="M52 54 L44 70"></path>
-              <path d="M90 54 L82 70"></path>
-              <circle cx="44" cy="72" r="6"></circle>
-              <circle cx="82" cy="72" r="6"></circle>
-              <path d="M52 30 L94 30"></path>
-              <path d="M56 38 L92 38"></path>
-              <path d="M60 46 L88 46"></path>
+              <path d="M45 86 C42 94 41 102 41 112"></path>
+              <path d="M52 86 C55 94 56 102 56 112"></path>
+              <ellipse cx="40" cy="115" rx="6" ry="3.5"></ellipse>
+              <ellipse cx="57" cy="115" rx="6" ry="3.5"></ellipse>
+            </g>
+          </svg>
+        </div>
+
+        <div class="miner right">
+          <svg viewBox="0 0 96 122" role="presentation">
+            <g class="body">
+              <circle cx="48" cy="15" r="9"></circle>
+              <path d="M36 38 C40 30 44 27 48 27 C53 27 57 30 60 38"></path>
+              <path d="M36 38 C34 50 34 60 38 72 C40 80 44 84 48 86"></path>
+              <path d="M60 38 C62 50 62 60 58 72 C56 80 52 84 48 86"></path>
+              <g class="arm-a">
+                <path d="M36 44 C46 42 54 40 65 40"></path>
+                <ellipse cx="68" cy="40" rx="5" ry="4"></ellipse>
+              </g>
+              <g class="arm-b">
+                <path d="M60 45 C67 54 72 60 77 67"></path>
+                <ellipse cx="79" cy="70" rx="5" ry="4"></ellipse>
+              </g>
+              <path d="M45 86 C42 94 41 102 41 112"></path>
+              <path d="M52 86 C55 94 56 102 56 112"></path>
+              <ellipse cx="40" cy="115" rx="6" ry="3.5"></ellipse>
+              <ellipse cx="57" cy="115" rx="6" ry="3.5"></ellipse>
+            </g>
+          </svg>
+        </div>
+
+        <div class="hook-mount" id="hookMount"></div>
+
+        <div class="hook-assembly" id="hookAssembly">
+          <div class="rope" id="rope"></div>
+          <div class="claw" id="claw">
+            <svg viewBox="0 0 52 52" role="presentation">
+              <path d="M26 8 L26 20"></path>
+              <path d="M20 18 H32"></path>
+              <path d="M18 22 C18 29 20 33 22 36"></path>
+              <path d="M34 22 C34 29 32 33 30 36"></path>
+              <g class="claw-left">
+                <path d="M22 35 C16 39 15 44 16 48"></path>
+              </g>
+              <g class="claw-right">
+                <path d="M30 35 C36 39 37 44 36 48"></path>
+              </g>
             </svg>
           </div>
         </div>
+      </div>
+
+      <div class="field-note">tap an icon and the claw will swing down to catch it</div>
+
+      <div class="icon-field" id="iconField">
+        <a class="project-icon" href="never-again.html" style="--left:16%; --top:34%; --tilt:-7deg;">
+          <div class="icon-shell">
+            <img src="src/icon_on_directory/21grams_raw.png" alt="Never Again icon">
+          </div>
+          <div class="icon-label">Never Again</div>
+        </a>
+
+        <a class="project-icon" href="whiskas.html" style="--left:38%; --top:40%; --tilt:6deg;">
+          <div class="icon-shell">
+            <img src="src/icon_on_directory/whiskas_removebg-preview.png" alt="Whiskas icon">
+          </div>
+          <div class="icon-label">Whiskas</div>
+        </a>
+
+        <a class="project-icon" href="raid.html" style="--left:61%; --top:33%; --tilt:-5deg;">
+          <div class="icon-shell">
+            <img src="src/icon_on_directory/raid_raw-removebg-preview.png" alt="RAID icon">
+          </div>
+          <div class="icon-label">RAID</div>
+        </a>
+
+        <a class="project-icon" href="your-vote-your-voice.html" style="--left:83%; --top:39%; --tilt:7deg;">
+          <div class="icon-shell">
+            <img src="src/icon_on_directory/404_raw.png" alt="404 Voice Not Found icon">
+          </div>
+          <div class="icon-label">404 Voice<br>Not Found</div>
+        </a>
+
+        <a class="project-icon" href="diamond.html" style="--left:23%; --top:72%; --tilt:5deg;">
+          <div class="icon-shell">
+            <img src="src/icon_on_directory/Dimond-removebg-preview.png" alt="Diamond icon">
+          </div>
+          <div class="icon-label">Diamond</div>
+        </a>
+
+        <a class="project-icon" href="butterworks-farm.html" style="--left:50%; --top:66%; --tilt:-6deg;">
+          <div class="icon-shell">
+            <img src="src/icon_on_directory/butterworks_raw-removebg-preview.png" alt="Butterworks Farm icon">
+          </div>
+          <div class="icon-label">Butterworks Farm</div>
+        </a>
+
+        <a class="project-icon" href="liquid-death.html" style="--left:77%; --top:71%; --tilt:-4deg;">
+          <div class="icon-shell">
+            <img src="src/icon_on_directory/liquid_raw-removebg-preview.png" alt="Liquid Death icon">
+          </div>
+          <div class="icon-label">Liquid Death</div>
+        </a>
       </div>
     </section>
   </main>
 
   <script>
-    const market = document.getElementById('market');
-    const products = document.querySelectorAll('.product[data-target]');
-    const cartLane = document.querySelector('.cart-lane');
-    const cartGroup = document.getElementById('cartGroup');
-    const cartBasket = document.getElementById('cartBasket');
+    const mineScene = document.getElementById('mineScene');
+    const machineZone = document.getElementById('machineZone');
+    const iconField = document.getElementById('iconField');
+    const hookMount = document.getElementById('hookMount');
+    const hookAssembly = document.getElementById('hookAssembly');
+    const claw = document.getElementById('claw');
+    const icons = Array.from(document.querySelectorAll('.project-icon'));
+    const HOOK_MOTION_MS = 780;
+    const DROP_DELAY_MS = 150;
+    const CATCH_PAUSE_MS = 120;
     let navigating = false;
+    let caughtIcon = null;
 
-    function resetDirectoryState() {
+    function applyResponsivePositions() {
+      const compact = window.innerWidth <= 640;
+      const medium = window.innerWidth <= 900 && !compact;
+
+      const mobile = [
+        ['24%', '28%'],
+        ['74%', '30%'],
+        ['24%', '49%'],
+        ['74%', '50%'],
+        ['24%', '70%'],
+        ['74%', '70%'],
+        ['50%', '88%']
+      ];
+
+      const tablet = [
+        ['18%', '33%'],
+        ['50%', '36%'],
+        ['82%', '31%'],
+        ['24%', '60%'],
+        ['52%', '63%'],
+        ['80%', '58%'],
+        ['46%', '84%']
+      ];
+
+      icons.forEach((icon, index) => {
+        if (compact) {
+          icon.style.setProperty('--left', mobile[index][0]);
+          icon.style.setProperty('--top', mobile[index][1]);
+        } else if (medium) {
+          icon.style.setProperty('--left', tablet[index][0]);
+          icon.style.setProperty('--top', tablet[index][1]);
+        }
+      });
+    }
+
+    function resetScene() {
       navigating = false;
       document.body.classList.remove('is-transitioning');
-      market.classList.remove('is-guiding');
-      cartGroup.style.setProperty('--cart-shift-x', '0px');
-      market.style.removeProperty('--star-1x');
-      market.style.removeProperty('--star-1y');
-      market.style.removeProperty('--star-2x');
-      market.style.removeProperty('--star-2y');
-      market.style.removeProperty('--star-3x');
-      market.style.removeProperty('--star-3y');
-      document.querySelectorAll('.flying-card').forEach((card) => card.remove());
-      products.forEach((product) => {
-        product.classList.remove('selected', 'is-hidden');
-      });
+      machineZone.classList.remove('is-guiding', 'is-grabbing', 'is-retracting');
+      hookAssembly.style.setProperty('--hook-angle', '0deg');
+      hookAssembly.style.setProperty('--hook-length', '0px');
+      icons.forEach((icon) => icon.classList.remove('is-hidden'));
+      if (caughtIcon) {
+        caughtIcon.remove();
+        caughtIcon = null;
+      }
     }
 
-    function clamp(value, min, max) {
-      return Math.min(Math.max(value, min), max);
-    }
-
-    function getCartShift(product) {
-      const productRect = product.getBoundingClientRect();
-      const laneRect = cartLane.getBoundingClientRect();
-      const groupRect = cartGroup.getBoundingClientRect();
-      const basketRect = cartBasket.getBoundingClientRect();
-      const productCenter = productRect.left + (productRect.width / 2);
-      const basketCenterOffset = (basketRect.left + (basketRect.width / 2)) - groupRect.left;
-      const desiredShift = productCenter - basketCenterOffset - groupRect.left;
-      const minShift = laneRect.left - groupRect.left + 4;
-      const maxShift = laneRect.right - groupRect.right - 4;
-
-      return clamp(desiredShift, minShift, maxShift);
-    }
-
-    function positionPickupStars(product) {
-      const productRect = product.getBoundingClientRect();
-      const marketRect = market.getBoundingClientRect();
-      const localLeft = productRect.left - marketRect.left;
-      const localTop = productRect.top - marketRect.top;
-      const width = productRect.width;
-      const height = productRect.height;
-
-      market.style.setProperty('--star-1x', `${localLeft + width * 0.14}px`);
-      market.style.setProperty('--star-1y', `${localTop + height * 0.3}px`);
-      market.style.setProperty('--star-2x', `${localLeft + width * 0.46}px`);
-      market.style.setProperty('--star-2y', `${localTop + height * 0.58}px`);
-      market.style.setProperty('--star-3x', `${localLeft + width * 0.72}px`);
-      market.style.setProperty('--star-3y', `${localTop + height * 0.26}px`);
-    }
-
-    function createFlyingCard(product, cartShift) {
-      const rect = product.getBoundingClientRect();
-      const cartRect = cartBasket.getBoundingClientRect();
-      const clone = product.cloneNode(true);
-      const scale = 0.28;
-      const futureCartLeft = cartRect.left + cartShift;
-      const targetLeft = futureCartLeft - (cartRect.width * 0.06) - (rect.width * scale * 0.5);
-      const targetTop = cartRect.top - (rect.height * scale * 1.68);
-      const translateX = targetLeft - rect.left;
-      const translateY = targetTop - rect.top;
-
-      clone.classList.remove('selected', 'is-hidden');
-      clone.classList.add('flying-card');
-      clone.removeAttribute('href');
-      clone.style.left = rect.left + 'px';
-      clone.style.top = rect.top + 'px';
-      clone.style.width = rect.width + 'px';
-      clone.style.height = rect.height + 'px';
-      document.body.appendChild(clone);
-
-      requestAnimationFrame(() => {
-        clone.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale}) rotate(-8deg)`;
-      });
-
+    function createCaughtIcon(icon) {
+      const sourceImage = icon.querySelector('img');
+      const imageRect = sourceImage.getBoundingClientRect();
+      const clone = document.createElement('div');
+      clone.className = 'caught-icon';
+      clone.style.width = `${Math.max(56, imageRect.width)}px`;
+      clone.style.height = `${Math.max(56, imageRect.height)}px`;
+      clone.appendChild(sourceImage.cloneNode(true));
+      claw.appendChild(clone);
       return clone;
     }
 
-    function fadeToPage(card, href) {
-      document.body.classList.add('is-transitioning');
-      card.style.transition = 'opacity 0.32s ease';
-      card.style.opacity = '0';
-
-      window.setTimeout(() => {
-        window.location.href = href;
-      }, 360);
+    function getShotMetrics(icon) {
+      const sceneRect = mineScene.getBoundingClientRect();
+      const mountRect = hookMount.getBoundingClientRect();
+      const iconRect = icon.querySelector('.icon-shell').getBoundingClientRect();
+      const mountX = mountRect.left - sceneRect.left + (mountRect.width / 2);
+      const mountY = mountRect.top - sceneRect.top + (mountRect.height / 2);
+      const iconX = iconRect.left - sceneRect.left + (iconRect.width / 2);
+      const iconY = iconRect.top - sceneRect.top + (iconRect.height / 2);
+      const deltaX = iconX - mountX;
+      const deltaY = iconY - mountY;
+      const hookAngle = Math.atan2(-deltaX, deltaY) * (180 / Math.PI);
+      const hookLength = Math.max(0, Math.hypot(deltaX, deltaY) - 26);
+      return { hookAngle, hookLength };
     }
 
-    products.forEach((product) => {
-      product.addEventListener('click', (event) => {
-        if (navigating) {
-          event.preventDefault();
-          return;
-        }
+    function fadeToPage(href) {
+      document.body.classList.add('is-transitioning');
+      if (caughtIcon) {
+        caughtIcon.style.opacity = '0';
+      }
+      window.setTimeout(() => {
+        window.location.href = href;
+      }, 420);
+    }
 
+    function handleIconClick(event) {
+      const icon = event.currentTarget;
+      if (navigating) {
         event.preventDefault();
-        navigating = true;
+        return;
+      }
 
-        market.classList.add('is-guiding');
-        product.classList.add('selected');
-        positionPickupStars(product);
-        const cartShift = getCartShift(product);
-        cartGroup.style.setProperty('--cart-shift-x', `${cartShift}px`);
-        const flyingCard = createFlyingCard(product, cartShift);
-        product.classList.add('is-hidden');
+      event.preventDefault();
+      navigating = true;
+      machineZone.classList.add('is-guiding');
 
-        window.setTimeout(() => {
-          fadeToPage(flyingCard, product.href);
-        }, 720);
-      });
-    });
+      const metrics = getShotMetrics(icon);
+      hookAssembly.style.setProperty('--hook-angle', `${metrics.hookAngle}deg`);
 
+      window.setTimeout(() => {
+        hookAssembly.style.setProperty('--hook-length', `${metrics.hookLength}px`);
+      }, DROP_DELAY_MS);
+
+      window.setTimeout(() => {
+        machineZone.classList.add('is-grabbing');
+        caughtIcon = createCaughtIcon(icon);
+        icon.classList.add('is-hidden');
+      }, DROP_DELAY_MS + HOOK_MOTION_MS);
+
+      window.setTimeout(() => {
+        hookAssembly.style.setProperty('--hook-angle', '0deg');
+        hookAssembly.style.setProperty('--hook-length', '78px');
+        machineZone.classList.remove('is-grabbing');
+        machineZone.classList.add('is-retracting');
+      }, DROP_DELAY_MS + HOOK_MOTION_MS + CATCH_PAUSE_MS);
+
+      window.setTimeout(() => {
+        fadeToPage(icon.href);
+      }, DROP_DELAY_MS + (HOOK_MOTION_MS * 2) + CATCH_PAUSE_MS + 180);
+    }
+
+    icons.forEach((icon) => icon.addEventListener('click', handleIconClick));
+
+    window.addEventListener('resize', applyResponsivePositions);
     window.addEventListener('pageshow', () => {
-      resetDirectoryState();
+      resetScene();
+      applyResponsivePositions();
     });
+
+    applyResponsivePositions();
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
