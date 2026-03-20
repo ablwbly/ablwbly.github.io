@@ -65,8 +65,9 @@
     .intro {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-      gap: 24px;
-      margin-bottom: 28px;
+      gap: 36px;
+      margin-bottom: 36px;
+      align-items: center;
     }
 
     .card,
@@ -80,23 +81,18 @@
 
     .card {
       padding: 0;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.96rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     h1 {
-      margin: 16px 0 10px;
-      font-size: clamp(3.1rem, 6vw, 5rem);
-      line-height: 0.95;
+      margin: 0;
+      font-size: clamp(3.6rem, 6.8vw, 5.8rem);
+      line-height: 0.93;
       font-weight: 600;
       letter-spacing: -0.03em;
     }
@@ -133,6 +129,25 @@
       line-height: 1.68;
     }
 
+    .campaign-note {
+      margin-top: 26px;
+      text-align: center;
+      max-width: 28rem;
+    }
+
+    .campaign-note p {
+      color: var(--ink);
+      font-size: 1.28rem;
+      line-height: 1.24;
+    }
+
+    .campaign-note em {
+      display: block;
+      color: var(--ink);
+      font-size: 1.12rem;
+      font-style: normal;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -164,6 +179,12 @@
       .page { width: min(1080px, calc(100% - 28px)); }
       .nav { flex-direction: column; align-items: flex-start; }
       .intro { grid-template-columns: 1fr; }
+      .card {
+        min-height: 0;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .campaign-note { text-align: left; }
       .gallery { grid-template-columns: 1fr; }
     }
 
@@ -191,25 +212,25 @@
 
     <section class="intro">
       <article class="card">
-        <span class="eyebrow">Civic Awareness Campaign</span>
         <h1>Your Vote, Your Voice</h1>
-        <p>
-          This concept uses missing-voice language and poster-led visuals to frame voting as an issue of presence, agency, and representation, pushing the audience to see political silence as something urgent rather than abstract.
-        </p>
+        <div class="campaign-note">
+          <p>Campaign Idea: 404 Voice Not Found</p>
+          <em>Visuals</em>
+        </div>
       </article>
 
       <aside class="meta">
         <div class="meta-block">
-          <strong>Direction</strong>
-          <span>A copy-led awareness campaign that turns absence, silence, and missing participation into the central visual idea.</span>
+          <strong>We Want To Tell</strong>
+          <span>Gen Z voters who post, click, and comment on everything but don't show up to vote</span>
         </div>
         <div class="meta-block">
-          <strong>Format</strong>
-          <span>Poster executions and supporting campaign visuals that balance direct civic messaging with bold graphic framing.</span>
+          <strong>That</strong>
+          <span>Your opinion only matters if you vote</span>
         </div>
         <div class="meta-block">
-          <strong>Tone</strong>
-          <span>Urgent, public-facing, and persuasive, with a visual language that treats every missing vote as a missing voice.</span>
+          <strong>Because</strong>
+          <span>Without showing up at the ballot box, your voice is just noise, not power.</span>
         </div>
       </aside>
     </section>

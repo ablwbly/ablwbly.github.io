@@ -65,8 +65,9 @@
     .intro {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-      gap: 24px;
-      margin-bottom: 28px;
+      gap: 36px;
+      margin-bottom: 36px;
+      align-items: center;
     }
 
     .card,
@@ -80,23 +81,18 @@
 
     .card {
       padding: 0;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.96rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     h1 {
-      margin: 16px 0 10px;
-      font-size: clamp(3.1rem, 6vw, 5rem);
-      line-height: 0.95;
+      margin: 0;
+      font-size: clamp(3.6rem, 6.8vw, 5.8rem);
+      line-height: 0.93;
       font-weight: 600;
       letter-spacing: -0.03em;
     }
@@ -164,6 +160,11 @@
       .page { width: min(1080px, calc(100% - 28px)); }
       .nav { flex-direction: column; align-items: flex-start; }
       .intro { grid-template-columns: 1fr; }
+      .card {
+        min-height: 0;
+        align-items: flex-start;
+        text-align: left;
+      }
     }
 
     @keyframes page-fade-in {
@@ -190,25 +191,21 @@
 
     <section class="intro">
       <article class="card">
-        <span class="eyebrow">Brand Visual Concept</span>
         <h1>Butterworks Farm</h1>
-        <p>
-          This project builds a softer, farm-rooted visual world around Butterworks Farm, using warm product imagery and rural cues to create a brand feeling that is handcrafted, grounded, and inviting.
-        </p>
       </article>
 
       <aside class="meta">
         <div class="meta-block">
-          <strong>Direction</strong>
-          <span>A brand concept centered on warmth, simplicity, and the tactile feeling of farm-made goods.</span>
+          <strong>We Want To Tell</strong>
+          <span>People who love yogurt but don't want factory-made food</span>
         </div>
         <div class="meta-block">
-          <strong>Visual Focus</strong>
-          <span>Clean product storytelling with rustic references that make the brand feel small-batch, human, and rooted in place.</span>
+          <strong>That</strong>
+          <span>Happier cows make better-tasting yogurt</span>
         </div>
         <div class="meta-block">
-          <strong>Tone</strong>
-          <span>Gentle, wholesome, and grounded, with a visual rhythm that emphasizes craft over spectacle.</span>
+          <strong>Because</strong>
+          <span>Butterworks Farm uses simple Vermont ingredients and raises cows humanely - no factories, no artificial junk, just real, feel-good dairy.</span>
         </div>
       </aside>
     </section>

@@ -65,8 +65,9 @@
     .intro {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-      gap: 24px;
-      margin-bottom: 28px;
+      gap: 36px;
+      margin-bottom: 36px;
+      align-items: center;
     }
 
     .card,
@@ -80,10 +81,18 @@
 
     .card {
       padding: 0;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     .eyebrow {
-      display: inline-block;
+      display: inline-flex;
+      align-self: center;
+      margin-bottom: 16px;
       padding: 7px 12px;
       border-radius: 999px;
       background: var(--accent-soft);
@@ -94,9 +103,9 @@
     }
 
     h1 {
-      margin: 16px 0 10px;
-      font-size: clamp(3.1rem, 6vw, 5rem);
-      line-height: 0.95;
+      margin: 0;
+      font-size: clamp(3.6rem, 6.8vw, 5.8rem);
+      line-height: 0.93;
       font-weight: 600;
       letter-spacing: -0.03em;
     }
@@ -106,6 +115,25 @@
       color: var(--muted);
       font-size: 1.22rem;
       line-height: 1.72;
+    }
+
+    .campaign-note {
+      margin-top: 26px;
+      text-align: center;
+      max-width: 28rem;
+    }
+
+    .campaign-note p {
+      color: var(--ink);
+      font-size: 1.28rem;
+      line-height: 1.24;
+    }
+
+    .campaign-note em {
+      display: block;
+      color: var(--ink);
+      font-size: 1.12rem;
+      font-style: italic;
     }
 
     .meta {
@@ -163,6 +191,13 @@
       .page { width: min(1080px, calc(100% - 28px)); }
       .nav { flex-direction: column; align-items: flex-start; }
       .intro { grid-template-columns: 1fr; }
+      .card {
+        min-height: 0;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .eyebrow { align-self: flex-start; }
+      .campaign-note { text-align: left; }
     }
 
     @keyframes page-fade-in {
@@ -189,11 +224,12 @@
 
     <section class="intro">
       <article class="card">
-        <span class="eyebrow">A Campaign Concept for 21GRAMS</span>
+        <span class="eyebrow">21GRAMS</span>
         <h1>Never Again</h1>
-        <p>
-          Never Again is a vaccine-awareness campaign concept built around one warning: diseases that feel historical can return the moment we stop trusting the vaccines that pushed them into the past.
-        </p>
+        <div class="campaign-note">
+          <p>Campaign Idea</p>
+          <em>Copy-ooh</em>
+        </div>
       </article>
 
       <aside class="meta">
