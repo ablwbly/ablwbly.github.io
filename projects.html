@@ -114,116 +114,159 @@
 
     .machine-zone {
       position: relative;
-      width: min(700px, calc(100% - 80px));
-      height: 246px;
-      margin: 18px auto 0;
+      width: min(760px, calc(100% - 80px));
+      height: 430px;
+      margin: 12px auto 0;
       z-index: 4;
     }
 
-    .machine-doodle {
+    .model-stage {
       position: absolute;
-      top: 10px;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .model-shell {
+      position: absolute;
       left: 50%;
-      width: 250px;
-      height: 188px;
+      bottom: 92px;
+      width: min(420px, calc(100% - 180px));
+      height: 360px;
       transform: translateX(-50%);
-      z-index: 3;
-      color: var(--machine-dark);
-    }
-
-    .machine-doodle svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      overflow: visible;
-      stroke: currentColor;
-      stroke-width: 3;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .machine-doodle .body-fill {
-      fill: rgba(255, 251, 245, 0.72);
-      stroke: none;
-    }
-
-    .machine-doodle .cheek {
-      fill: rgba(141, 118, 98, 0.12);
-      stroke: none;
-    }
-
-    .machine-doodle .wheel {
-      fill: rgba(255, 251, 245, 0.78);
-    }
-
-    .miner {
-      position: absolute;
-      top: 64px;
-      width: 108px;
-      height: 140px;
-      color: var(--accent);
-    }
-
-    .miner.left { left: 54px; }
-    .miner.right { right: 54px; }
-
-    .miner svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      overflow: visible;
-      stroke: currentColor;
-      stroke-width: 2.6;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .miner .body {
       transform-origin: center bottom;
-      animation: miner-bob 3.2s ease-in-out infinite;
+      transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .miner.right .body { animation-delay: 0.4s; }
-
-    .machine-zone.is-guiding .miner.right .arm-a,
-    .machine-zone.is-guiding .miner.right .arm-b {
-      transform-origin: center top;
-      transform-box: fill-box;
-      animation: crank-motion 0.62s ease-in-out infinite;
+    .machine-zone.is-guiding .model-shell {
+      transform: translateX(-50%) rotate(-2deg) translateY(-2px);
     }
 
-    .hook-mount {
+    .machine-zone.is-precast .model-shell {
+      transform: translateX(-50%) rotate(3.5deg) translateY(2px);
+    }
+
+    .machine-zone.is-casting .model-shell {
+      transform: translateX(-50%) rotate(-5deg) translateY(-4px);
+    }
+
+    .machine-zone.is-reeling .model-shell {
+      transform: translateX(-50%) rotate(1.8deg) translateY(-1px);
+    }
+
+    .machine-zone.is-holding .model-shell {
+      transform: translateX(-50%) rotate(1deg) translateY(-1px);
+    }
+
+    .model-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .model-loading {
       position: absolute;
-      top: 34px;
       left: 50%;
-      width: 22px;
-      height: 22px;
-      transform: translateX(-50%);
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-2deg);
+      color: var(--muted);
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      transition: opacity 0.24s ease;
+    }
+
+    .model-stage.is-ready .model-loading {
+      opacity: 0;
+    }
+
+    .fishing-rod {
+      position: absolute;
+      left: calc(50% - 50px);
+      top: 246px;
+      width: 176px;
+      height: 13px;
+      transform: translateX(0) rotate(-26deg);
+      transform-origin: 12px 50%;
+      transition: transform 0.1s linear;
+      z-index: 8;
+    }
+
+    .hook-assembly {
+      opacity: 0;
+      transition:
+        transform 0.78s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.01s linear;
+    }
+
+    .machine-zone.is-guiding .hook-assembly,
+    .machine-zone.is-casting .hook-assembly,
+    .machine-zone.is-grabbing .hook-assembly,
+    .machine-zone.is-reeling .hook-assembly,
+    .machine-zone.is-holding .hook-assembly {
+      opacity: 1;
+    }
+
+    .machine-zone.is-precast .fishing-rod {
+      transform: translateX(-12px) rotate(-48deg);
+    }
+
+    .machine-zone.is-casting .fishing-rod {
+      transform: translateX(22px) rotate(10deg);
+    }
+
+    .machine-zone.is-reeling .fishing-rod {
+      transform: translateX(10px) rotate(-10deg);
+    }
+
+    .machine-zone.is-holding .fishing-rod {
+      transform: translateX(2px) rotate(-20deg);
+    }
+
+    .rod-shaft {
+      position: absolute;
+      inset: 5px 18px 5px 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(111, 89, 69, 0.95), rgba(176, 150, 122, 0.65));
+    }
+
+    .rod-reel {
+      position: absolute;
+      left: 8px;
+      top: 2px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(111, 89, 69, 0.9);
       border-radius: 50%;
-      background: linear-gradient(180deg, #fff7ee, #ccb19b);
-      box-shadow:
-        0 6px 10px rgba(77, 64, 52, 0.12),
-        inset 0 1px 0 rgba(255, 248, 240, 0.8);
-      z-index: 6;
+      background: rgba(248, 241, 232, 0.84);
+    }
+
+    .rod-tip {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      width: 0;
+      height: 0;
+      transform: translate(50%, -50%);
+      opacity: 0;
+      pointer-events: none;
     }
 
     .hook-assembly {
       position: absolute;
-      top: 44px;
-      left: 50%;
+      right: 18px;
+      top: 50%;
       width: 0;
       height: 0;
-      transform: translateX(-50%) rotate(var(--hook-angle, 0deg));
+      transform: translate(50%, -50%) rotate(var(--hook-angle, 0deg));
       transform-origin: top center;
-      transition: transform 0.78s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 5;
+      pointer-events: none;
     }
 
     .rope {
       position: absolute;
-      left: 50%;
+      left: 0;
       top: 0;
       width: 3px;
       height: var(--hook-length, 0px);
@@ -235,7 +278,7 @@
     .claw {
       position: absolute;
       top: var(--hook-length, 0px);
-      left: 50%;
+      left: 0;
       width: 52px;
       height: 52px;
       transform: translate(-50%, -6px);
@@ -265,11 +308,11 @@
 
     .field-note {
       position: absolute;
-      top: 224px;
+      top: 324px;
       left: 50%;
       transform: translateX(-50%) rotate(-1deg);
       color: var(--muted);
-      font-size: 0.98rem;
+      font-size: 0.84rem;
       opacity: 0.92;
       z-index: 4;
       transition: opacity 0.22s ease;
@@ -282,7 +325,7 @@
     .icon-field {
       position: relative;
       min-height: 710px;
-      padding: 340px 32px 56px;
+      padding: 444px 32px 56px;
       z-index: 3;
     }
 
@@ -334,12 +377,36 @@
     .caught-icon {
       position: absolute;
       left: 50%;
-      top: 10px;
+      top: 6px;
       pointer-events: none;
       z-index: 6;
       transform: translate(-50%, 0) rotate(-18deg) scale(0.78);
       transform-origin: center center;
       transition: opacity 0.24s ease;
+    }
+
+    .held-icon {
+      position: absolute;
+      left: 58%;
+      top: 186px;
+      pointer-events: none;
+      z-index: 7;
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(-12deg) scale(0.74);
+      transform-origin: center center;
+      transition: opacity 0.24s ease;
+    }
+
+    .machine-zone.is-holding .held-icon {
+      opacity: 1;
+    }
+
+    .held-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 10px 14px rgba(77, 64, 52, 0.12));
     }
 
     .caught-icon img {
@@ -350,32 +417,32 @@
       filter: drop-shadow(0 8px 12px rgba(77, 64, 52, 0.12));
     }
 
-    @keyframes miner-bob {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-4px) rotate(1.5deg); }
-    }
-
-    @keyframes crank-motion {
-      0%, 100% { transform: rotate(8deg); }
-      50% { transform: rotate(-12deg); }
-    }
-
     @media (max-width: 900px) {
       .page { width: min(1180px, calc(100% - 28px)); }
       .mine-scene { min-height: 1220px; }
       .machine-zone {
-        width: min(560px, calc(100% - 30px));
-        height: 230px;
+        width: min(620px, calc(100% - 30px));
+        height: 372px;
       }
-      .machine-doodle {
-        width: 214px;
-        height: 168px;
+      .model-shell {
+        width: min(350px, calc(100% - 120px));
+        height: 300px;
+        bottom: 78px;
       }
-      .miner.left { left: 12px; }
-      .miner.right { right: 12px; }
+      .fishing-rod {
+        left: calc(50% + 76px);
+        top: 215px;
+        width: 156px;
+      }
+      .held-icon {
+        top: 190px;
+      }
+      .field-note {
+        top: 296px;
+      }
       .icon-field {
         min-height: 940px;
-        padding: 334px 20px 46px;
+        padding: 404px 20px 46px;
       }
       .project-icon {
         width: 132px;
@@ -394,29 +461,29 @@
       }
       .mine-scene { min-height: 1440px; }
       .machine-zone {
-        width: min(360px, calc(100% - 18px));
-        height: 216px;
+        width: min(400px, calc(100% - 18px));
+        height: 340px;
       }
-      .machine-doodle {
-        width: 180px;
-        height: 148px;
+      .model-shell {
+        width: min(280px, calc(100% - 56px));
+        height: 268px;
+        bottom: 66px;
       }
-      .miner {
-        width: 86px;
-        height: 118px;
-        top: 76px;
+      .fishing-rod {
+        left: calc(50% + 58px);
+        top: 185px;
+        width: 138px;
+        transform: translateX(0) rotate(-24deg);
       }
-      .miner.left { left: 0; }
-      .miner.right { right: 0; }
       .field-note {
-        top: 206px;
+        top: 266px;
         width: calc(100% - 28px);
         text-align: center;
-        font-size: 0.9rem;
+        font-size: 0.78rem;
       }
       .icon-field {
         min-height: 1180px;
-        padding: 328px 12px 36px;
+        padding: 438px 12px 36px;
       }
       .project-icon {
         width: 114px;
@@ -424,8 +491,19 @@
       .icon-label {
         font-size: 0.94rem;
       }
+      .held-icon {
+        top: 176px;
+      }
     }
-  </style>
+</style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/"
+      }
+    }
+  </script>
 </head>
 <body>
   <main class="page">
@@ -443,99 +521,34 @@
       <div class="scene-note">pick from the field</div>
 
       <div class="machine-zone" id="machineZone" aria-hidden="true">
-        <div class="machine-doodle" aria-hidden="true">
-          <svg viewBox="0 0 220 160" role="presentation">
-            <path class="body-fill" d="M61 41 C69 28 84 20 110 20 C136 20 152 28 159 41 C173 43 182 54 182 68 C182 80 176 90 167 96 L163 121 C162 131 154 138 143 138 H76 C66 138 58 131 57 121 L53 96 C44 90 38 80 38 68 C38 54 47 43 61 41 Z"></path>
-            <path d="M76 39 C84 27 96 22 110 22 C125 22 137 27 145 39"></path>
-            <path d="M61 41 C48 42 38 53 38 68 C38 80 44 89 53 95"></path>
-            <path d="M159 41 C172 42 182 53 182 68 C182 80 176 89 167 95"></path>
-            <path d="M53 95 L57 122 C58 132 66 138 77 138"></path>
-            <path d="M167 95 L163 122 C162 132 154 138 143 138"></path>
-            <path d="M77 138 H143"></path>
-            <path d="M84 138 L79 149"></path>
-            <path d="M136 138 L141 149"></path>
-            <path d="M74 149 H92"></path>
-            <path d="M128 149 H146"></path>
-            <path d="M110 22 L110 10"></path>
-            <path d="M96 12 C101 8 106 6 110 6 C114 6 119 8 124 12"></path>
-            <circle class="wheel" cx="77" cy="138" r="8"></circle>
-            <circle class="wheel" cx="143" cy="138" r="8"></circle>
-            <path d="M89 73 C95 67 102 64 110 64 C118 64 125 67 131 73"></path>
-            <circle cx="91" cy="57" r="3"></circle>
-            <circle cx="129" cy="57" r="3"></circle>
-            <ellipse class="cheek" cx="80" cy="67" rx="8" ry="5"></ellipse>
-            <ellipse class="cheek" cx="140" cy="67" rx="8" ry="5"></ellipse>
-            <path d="M63 85 C73 79 82 75 92 74"></path>
-            <path d="M157 85 C147 79 138 75 128 74"></path>
-            <path d="M53 92 C48 92 43 94 39 98"></path>
-            <path d="M167 92 C172 92 177 94 181 98"></path>
-          </svg>
-        </div>
-
-        <div class="miner left">
-          <svg viewBox="0 0 96 122" role="presentation">
-            <g class="body">
-              <circle cx="48" cy="15" r="9"></circle>
-              <path d="M36 38 C40 30 44 27 48 27 C53 27 57 30 60 38"></path>
-              <path d="M36 38 C34 50 34 60 38 72 C40 80 44 84 48 86"></path>
-              <path d="M60 38 C62 50 62 60 58 72 C56 80 52 84 48 86"></path>
-              <g class="arm-a">
-                <path d="M36 45 C29 53 25 62 25 71"></path>
-                <ellipse cx="24" cy="74" rx="5" ry="4"></ellipse>
-              </g>
-              <g class="arm-b">
-                <path d="M60 44 C68 47 74 52 79 58"></path>
-                <ellipse cx="81" cy="60" rx="5" ry="4"></ellipse>
-              </g>
-              <path d="M45 86 C42 94 41 102 41 112"></path>
-              <path d="M52 86 C55 94 56 102 56 112"></path>
-              <ellipse cx="40" cy="115" rx="6" ry="3.5"></ellipse>
-              <ellipse cx="57" cy="115" rx="6" ry="3.5"></ellipse>
-            </g>
-          </svg>
-        </div>
-
-        <div class="miner right">
-          <svg viewBox="0 0 96 122" role="presentation">
-            <g class="body">
-              <circle cx="48" cy="15" r="9"></circle>
-              <path d="M36 38 C40 30 44 27 48 27 C53 27 57 30 60 38"></path>
-              <path d="M36 38 C34 50 34 60 38 72 C40 80 44 84 48 86"></path>
-              <path d="M60 38 C62 50 62 60 58 72 C56 80 52 84 48 86"></path>
-              <g class="arm-a">
-                <path d="M36 44 C46 42 54 40 65 40"></path>
-                <ellipse cx="68" cy="40" rx="5" ry="4"></ellipse>
-              </g>
-              <g class="arm-b">
-                <path d="M60 45 C67 54 72 60 77 67"></path>
-                <ellipse cx="79" cy="70" rx="5" ry="4"></ellipse>
-              </g>
-              <path d="M45 86 C42 94 41 102 41 112"></path>
-              <path d="M52 86 C55 94 56 102 56 112"></path>
-              <ellipse cx="40" cy="115" rx="6" ry="3.5"></ellipse>
-              <ellipse cx="57" cy="115" rx="6" ry="3.5"></ellipse>
-            </g>
-          </svg>
-        </div>
-
-        <div class="hook-mount" id="hookMount"></div>
-
-        <div class="hook-assembly" id="hookAssembly">
-          <div class="rope" id="rope"></div>
-          <div class="claw" id="claw">
-            <svg viewBox="0 0 52 52" role="presentation">
-              <path d="M26 8 L26 20"></path>
-              <path d="M20 18 H32"></path>
-              <path d="M18 22 C18 29 20 33 22 36"></path>
-              <path d="M34 22 C34 29 32 33 30 36"></path>
-              <g class="claw-left">
-                <path d="M22 35 C16 39 15 44 16 48"></path>
-              </g>
-              <g class="claw-right">
-                <path d="M30 35 C36 39 37 44 36 48"></path>
-              </g>
-            </svg>
+        <div class="model-stage" id="modelStage" aria-hidden="true">
+          <div class="model-shell" id="modelShell">
+            <canvas class="model-canvas" id="modelCanvas"></canvas>
+            <div class="model-loading" id="modelLoading">loading fisher...</div>
           </div>
+          <div class="fishing-rod" id="fishingRod">
+            <div class="rod-reel"></div>
+            <div class="rod-shaft"></div>
+            <div class="rod-tip" id="rodTip"></div>
+            <div class="hook-assembly" id="hookAssembly">
+              <div class="rope" id="rope"></div>
+              <div class="claw" id="claw">
+                <svg viewBox="0 0 52 52" role="presentation">
+                  <path d="M26 8 L26 20"></path>
+                  <path d="M20 18 H32"></path>
+                  <path d="M18 22 C18 29 20 33 22 36"></path>
+                  <path d="M34 22 C34 29 32 33 30 36"></path>
+                  <g class="claw-left">
+                    <path d="M22 35 C16 39 15 44 16 48"></path>
+                  </g>
+                  <g class="claw-right">
+                    <path d="M30 35 C36 39 37 44 36 48"></path>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="held-icon" id="heldIcon"></div>
         </div>
       </div>
 
@@ -594,19 +607,152 @@
     </section>
   </main>
 
-  <script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { MMDLoader } from 'three/addons/loaders/MMDLoader.js';
+
+    const MODEL_URLS = [
+      'src/mmd/BIddtb7O1tylRAki-xojI/%E5%96%9C%E7%BE%8A%E7%BE%8A-%E5%87%8C%E8%82%96/%E5%96%9C%E7%BE%8A%E7%BE%8A%E5%87%8C%E8%82%96.pmx',
+      'src/mmd/4jrk_8ZSSL61ScB_fmMNC/%E6%9D%8E%E6%B3%BD%E8%A8%80/%E5%86%9C%E5%AE%B6%E4%B9%90_%E6%9D%8E%E6%B3%BD%E8%A8%80_%E6%97%A0%E5%B8%BD%E5%AD%90.pmx',
+      'src/mmd/uGpzCHVJKKN9KGn4/%E9%BB%8E%E6%B7%B1%C2%B7%E4%BB%A5%E6%88%91%E5%AF%84%E9%BB%8E%E6%98%8EQ%E7%89%88/%E9%BB%8E%E6%B7%B1%C2%B7%E4%BB%A5%E6%88%91%E5%AF%84%E9%BB%8E%E6%98%8EQ%E7%89%88.pmx'
+    ];
     const mineScene = document.getElementById('mineScene');
     const machineZone = document.getElementById('machineZone');
+    const modelStage = document.getElementById('modelStage');
+    const modelShell = document.getElementById('modelShell');
+    const modelCanvas = document.getElementById('modelCanvas');
+    const modelLoading = document.getElementById('modelLoading');
     const iconField = document.getElementById('iconField');
-    const hookMount = document.getElementById('hookMount');
+    const fishingRod = document.getElementById('fishingRod');
+    const rodTip = document.getElementById('rodTip');
     const hookAssembly = document.getElementById('hookAssembly');
     const claw = document.getElementById('claw');
+    const heldIcon = document.getElementById('heldIcon');
     const icons = Array.from(document.querySelectorAll('.project-icon'));
-    const HOOK_MOTION_MS = 780;
-    const DROP_DELAY_MS = 150;
-    const CATCH_PAUSE_MS = 120;
+    const HOOK_MOTION_MS = 600;
+    const DROP_DELAY_MS = 0;
+    const CATCH_PAUSE_MS = 0;
+    const HOLD_PAUSE_MS = 0;
+    const PRECAST_MS = 100;
+    const ROD_CAST_MS = 100;
     let navigating = false;
     let caughtIcon = null;
+    let renderer;
+    let camera;
+    let scene;
+    let actorRoot;
+    let actorMesh = null;
+    let animationFrameId = null;
+    let targetTilt = 0;
+    let targetTurn = 0;
+    let modelLoadIndex = 0;
+
+    function setupModelScene() {
+      if (window.location.protocol === 'file:') {
+        modelLoading.textContent = 'run this page from a local server';
+        return;
+      }
+
+      renderer = new THREE.WebGLRenderer({
+        canvas: modelCanvas,
+        alpha: true,
+        antialias: true
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(26, 1, 0.1, 100);
+      camera.position.set(0, 1.45, 6.8);
+
+      const hemi = new THREE.HemisphereLight(0xfffbf5, 0xcab8a2, 2.2);
+      scene.add(hemi);
+
+      const key = new THREE.DirectionalLight(0xffffff, 1.4);
+      key.position.set(2.8, 4.2, 5.8);
+      scene.add(key);
+
+      const fill = new THREE.DirectionalLight(0xf4e8da, 0.9);
+      fill.position.set(-3.2, 2.4, 3.4);
+      scene.add(fill);
+
+      actorRoot = new THREE.Group();
+      scene.add(actorRoot);
+
+      resizeModelScene();
+
+      loadModelCandidate();
+
+      renderModel();
+    }
+
+    function loadModelCandidate() {
+      const loader = new MMDLoader();
+      const modelUrl = MODEL_URLS[modelLoadIndex];
+
+      if (!modelUrl) {
+        modelLoading.textContent = 'model load failed';
+        return;
+      }
+
+      modelLoading.textContent = `loading fisher ${modelLoadIndex + 1}/${MODEL_URLS.length}...`;
+
+      loader.load(
+        modelUrl,
+        (mesh) => {
+          actorMesh = mesh;
+          fitModelToStage(mesh);
+          actorRoot.add(mesh);
+          modelStage.classList.add('is-ready');
+          modelLoading.textContent = '';
+        },
+        (event) => {
+          if (event?.lengthComputable && event.total > 0) {
+            const percent = Math.round((event.loaded / event.total) * 100);
+            modelLoading.textContent = `loading fisher ${percent}%`;
+          }
+        },
+        (error) => {
+          console.error('PMX load failed:', modelUrl, error);
+          modelLoadIndex += 1;
+          loadModelCandidate();
+        }
+      );
+    }
+
+    function fitModelToStage(mesh) {
+      const box = new THREE.Box3().setFromObject(mesh);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      const maxSide = Math.max(size.y, size.x, size.z);
+      const scale = 1.54 / Math.max(maxSide, 1);
+      mesh.scale.setScalar(scale);
+      mesh.position.set(
+        -center.x * scale,
+        -box.min.y * scale + 0.16,
+        -center.z * scale
+      );
+      mesh.rotation.set(0, 0.18, 0);
+    }
+
+    function resizeModelScene() {
+      if (!renderer || !camera) return;
+      const rect = modelShell.getBoundingClientRect();
+      const width = Math.max(1, Math.floor(rect.width));
+      const height = Math.max(1, Math.floor(rect.height));
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+
+    function renderModel() {
+      animationFrameId = window.requestAnimationFrame(renderModel);
+      if (actorRoot) {
+        actorRoot.rotation.z += (targetTilt - actorRoot.rotation.z) * 0.08;
+        actorRoot.rotation.y += (targetTurn - actorRoot.rotation.y) * 0.08;
+      }
+      renderer.render(scene, camera);
+    }
 
     function applyResponsivePositions() {
       const compact = window.innerWidth <= 640;
@@ -643,10 +789,16 @@
       });
     }
 
+    function resetHeldIcon() {
+      heldIcon.innerHTML = '';
+      heldIcon.style.width = '';
+      heldIcon.style.height = '';
+    }
+
     function resetScene() {
       navigating = false;
       document.body.classList.remove('is-transitioning');
-      machineZone.classList.remove('is-guiding', 'is-grabbing', 'is-retracting');
+      machineZone.classList.remove('is-precast', 'is-guiding', 'is-casting', 'is-grabbing', 'is-reeling', 'is-retracting', 'is-holding');
       hookAssembly.style.setProperty('--hook-angle', '0deg');
       hookAssembly.style.setProperty('--hook-length', '0px');
       icons.forEach((icon) => icon.classList.remove('is-hidden'));
@@ -654,6 +806,9 @@
         caughtIcon.remove();
         caughtIcon = null;
       }
+      resetHeldIcon();
+      targetTilt = 0;
+      targetTurn = 0;
     }
 
     function createCaughtIcon(icon) {
@@ -668,19 +823,50 @@
       return clone;
     }
 
+    function moveIconToHand(icon) {
+      const sourceImage = icon.querySelector('img');
+      const imageRect = sourceImage.getBoundingClientRect();
+      const clone = sourceImage.cloneNode(true);
+      heldIcon.style.width = `${Math.max(52, imageRect.width * 0.82)}px`;
+      heldIcon.style.height = `${Math.max(52, imageRect.height * 0.82)}px`;
+      heldIcon.innerHTML = '';
+      heldIcon.appendChild(clone);
+      machineZone.classList.add('is-holding');
+    }
+
+    function getRodTipPoint() {
+      const zoneRect = machineZone.getBoundingClientRect();
+      const tipRect = rodTip.getBoundingClientRect();
+      return {
+        x: tipRect.left - zoneRect.left + (tipRect.width / 2),
+        y: tipRect.top - zoneRect.top + (tipRect.height / 2)
+      };
+    }
+
+    function getElementRotationDegrees(element) {
+      const transform = window.getComputedStyle(element).transform;
+      if (!transform || transform === 'none') {
+        return 0;
+      }
+      const matrix = new DOMMatrixReadOnly(transform);
+      return Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
+    }
+
     function getShotMetrics(icon) {
-      const sceneRect = mineScene.getBoundingClientRect();
-      const mountRect = hookMount.getBoundingClientRect();
+      const zoneRect = machineZone.getBoundingClientRect();
       const iconRect = icon.querySelector('.icon-shell').getBoundingClientRect();
-      const mountX = mountRect.left - sceneRect.left + (mountRect.width / 2);
-      const mountY = mountRect.top - sceneRect.top + (mountRect.height / 2);
-      const iconX = iconRect.left - sceneRect.left + (iconRect.width / 2);
-      const iconY = iconRect.top - sceneRect.top + (iconRect.height / 2);
-      const deltaX = iconX - mountX;
-      const deltaY = iconY - mountY;
-      const hookAngle = Math.atan2(-deltaX, deltaY) * (180 / Math.PI);
+      const rodTip = getRodTipPoint();
+      const iconX = iconRect.left - zoneRect.left + (iconRect.width / 2);
+      const iconY = iconRect.top - zoneRect.top + (iconRect.height * 0.58);
+      const deltaX = iconX - rodTip.x;
+      const deltaY = iconY - rodTip.y;
+      const absoluteAngle = Math.atan2(-deltaX, deltaY) * (180 / Math.PI);
+      const rodAngle = getElementRotationDegrees(fishingRod);
       const hookLength = Math.max(0, Math.hypot(deltaX, deltaY) - 26);
-      return { hookAngle, hookLength };
+      return {
+        hookAngle: absoluteAngle - rodAngle,
+        hookLength
+      };
     }
 
     function fadeToPage(href) {
@@ -688,6 +874,7 @@
       if (caughtIcon) {
         caughtIcon.style.opacity = '0';
       }
+      heldIcon.style.opacity = '0';
       window.setTimeout(() => {
         window.location.href = href;
       }, 420);
@@ -702,42 +889,72 @@
 
       event.preventDefault();
       navigating = true;
-      machineZone.classList.add('is-guiding');
-
-      const metrics = getShotMetrics(icon);
-      hookAssembly.style.setProperty('--hook-angle', `${metrics.hookAngle}deg`);
+      machineZone.classList.add('is-precast');
+      targetTilt = 0.08;
+      targetTurn = -0.1;
+      let metrics;
+      const lineLaunchMs = PRECAST_MS + ROD_CAST_MS;
 
       window.setTimeout(() => {
+        machineZone.classList.remove('is-precast');
+        machineZone.classList.add('is-casting');
+        targetTilt = -0.12;
+        targetTurn = 0.34;
+      }, PRECAST_MS);
+
+      window.setTimeout(() => {
+        metrics = getShotMetrics(icon);
+        machineZone.classList.add('is-guiding');
+        hookAssembly.style.setProperty('--hook-angle', `${metrics.hookAngle}deg`);
         hookAssembly.style.setProperty('--hook-length', `${metrics.hookLength}px`);
-      }, DROP_DELAY_MS);
+      }, lineLaunchMs);
 
       window.setTimeout(() => {
         machineZone.classList.add('is-grabbing');
         caughtIcon = createCaughtIcon(icon);
         icon.classList.add('is-hidden');
-      }, DROP_DELAY_MS + HOOK_MOTION_MS);
+      }, lineLaunchMs + DROP_DELAY_MS + HOOK_MOTION_MS);
 
       window.setTimeout(() => {
-        hookAssembly.style.setProperty('--hook-angle', '0deg');
-        hookAssembly.style.setProperty('--hook-length', '78px');
-        machineZone.classList.remove('is-grabbing');
-        machineZone.classList.add('is-retracting');
-      }, DROP_DELAY_MS + HOOK_MOTION_MS + CATCH_PAUSE_MS);
+        hookAssembly.style.setProperty('--hook-angle', `${-getElementRotationDegrees(fishingRod)}deg`);
+        hookAssembly.style.setProperty('--hook-length', '74px');
+        machineZone.classList.remove('is-grabbing', 'is-casting');
+        machineZone.classList.add('is-reeling', 'is-retracting');
+        targetTilt = 0.02;
+        targetTurn = 0.18;
+      }, lineLaunchMs + DROP_DELAY_MS + HOOK_MOTION_MS + CATCH_PAUSE_MS);
+
+      window.setTimeout(() => {
+        if (caughtIcon) {
+          caughtIcon.remove();
+          caughtIcon = null;
+        }
+        moveIconToHand(icon);
+        machineZone.classList.remove('is-guiding', 'is-reeling', 'is-retracting');
+        targetTilt = 0;
+        targetTurn = 0.14;
+      }, lineLaunchMs + DROP_DELAY_MS + (HOOK_MOTION_MS * 2) + CATCH_PAUSE_MS - 40);
 
       window.setTimeout(() => {
         fadeToPage(icon.href);
-      }, DROP_DELAY_MS + (HOOK_MOTION_MS * 2) + CATCH_PAUSE_MS + 180);
+      }, lineLaunchMs + DROP_DELAY_MS + (HOOK_MOTION_MS * 2) + CATCH_PAUSE_MS + HOLD_PAUSE_MS);
     }
 
     icons.forEach((icon) => icon.addEventListener('click', handleIconClick));
 
-    window.addEventListener('resize', applyResponsivePositions);
+    window.addEventListener('resize', () => {
+      applyResponsivePositions();
+      resizeModelScene();
+    });
+
     window.addEventListener('pageshow', () => {
       resetScene();
       applyResponsivePositions();
+      resizeModelScene();
     });
 
     applyResponsivePositions();
+    setupModelScene();
   </script>
 </body>
 </html>
