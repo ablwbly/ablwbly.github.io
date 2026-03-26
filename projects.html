@@ -844,8 +844,9 @@
 
     function getIconTargetPagePoint(icon) {
       const iconRect = icon.querySelector('.icon-shell').getBoundingClientRect();
+      const mobileTargetOffsetX = window.innerWidth <= 640 ? 12 : 8;
       return {
-        x: iconRect.left + window.scrollX + (iconRect.width / 2) + 8,
+        x: iconRect.left + window.scrollX + (iconRect.width / 2) + mobileTargetOffsetX,
         y: iconRect.top + window.scrollY + (iconRect.height * 0.58)
       };
     }
